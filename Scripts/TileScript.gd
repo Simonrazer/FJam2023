@@ -6,32 +6,44 @@ var wf : Material = preload("res://Prefabs/wf.tres")
 var b_ : Material = preload("res://Prefabs/b_.tres")
 var w_ : Material = preload("res://Prefabs/w_.tres")
 
+var blu : Material = preload("res://Prefabs/blueHigh.tres")
+
+var color : String
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#rando = RandomNumberGenerator.new().randi()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	pass
 
 #type: w/b|e/f/_
-func init(type: String):
-
-	var col:Color
+func set_color(type: String):
+	color = type
 	if type[0] == "w":
 		if type[1] == "e":
-			get_node("MeshInstance3D").set_material_override(we)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(we)
 		elif type[1] == "f":
-			get_node("MeshInstance3D").set_material_override(wf)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(wf)
 		elif type[1] == "_":
-			get_node("MeshInstance3D").set_material_override(w_)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(w_)
 	elif type[0] == "b":
 		if type[1] == "e":
-			get_node("MeshInstance3D").set_material_override(be)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(be)
 		elif type[1] == "f":
-			get_node("MeshInstance3D").set_material_override(bf)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(bf)
 		elif type[1] == "_":
-			get_node("MeshInstance3D").set_material_override(b_)
+			get_node("StaticBody3D/MeshInstance3D").set_material_override(b_)
 
+func reset_color():
+	set_color(color)
+
+func highlight():
+	get_node("StaticBody3D/MeshInstance3D").set_material_override(blu)
+
+func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
+	if Input.is_action_just_pressed("click"):
+		highlight()
+	pass # Replace with function body.

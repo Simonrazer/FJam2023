@@ -18,7 +18,7 @@ func load_file(file):
 	for ch in content:
 		match ch:
 			'T':
-				addTile(width,height, "b_")
+				addTile(width,height, "wf")
 				width = width + 1
 			'\n':
 				height = height + 1
@@ -33,7 +33,7 @@ func addTile(width,height,type):
 	var tile = tile_scene.instantiate()
 	#set color base on checkerboard pattern
 	tile.position = Vector3(width, 0, height)
-	tile.init(type)
+	tile.set_color(type)
 	add_child(tile)
 #bathtubSpawn.set_position(spawner.get_position())
 	var debugtemplate = "{0} {1},{2}".format({0:width, 1:height, 2:color})
