@@ -77,10 +77,10 @@ func do_action(target_pos: Vector2, action: Action):
 	var return_value: bool
 	
 	if action == Action.Damage:
-		return_value = attack_ability(target_pos, damage)
+		return_value = attack_ability(target_pos, damage, false)
 	
 	if action == Action.Steal:
-		return_value = attack_ability(target_pos, steal)
+		return_value = attack_ability(target_pos, steal, true)
 	
 	if action == Action.Heal:
 		return_value = heal_ability(target_pos)
@@ -91,7 +91,7 @@ func do_action(target_pos: Vector2, action: Action):
 	actions[1] = false
 	return true
 
-func attack_ability(enemy_pos: Vector2, action_stats: Vector2):
+func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool):
 	var diff_vector = Vector2(enemy_pos.x - position_on_map.x, enemy_pos.y - position_on_map.y)
 	
 	if abs(diff_vector.x) > damage_range or abs(diff_vector.y) > damage_range:
@@ -99,8 +99,12 @@ func attack_ability(enemy_pos: Vector2, action_stats: Vector2):
 
 	#TODO check if enemy else return false
 	#TODO get enemy CharacterBase
-	#TODO enemy.take_damage(action_stat.x)
-	health += action_stats.y
+	var return_value: bool = 0 
+	#TODO return value = enemy.take_damage(action_stat.x)
+	
+	if is_steal and not return_value:
+		health += action_stats.y
+	
 	check_for_death()
 	
 	return true
@@ -130,11 +134,16 @@ func take_damage(damage_to_take: int):
 	armor -= damage_to_take
 	
 	if armor < 0:
-		health -= armor
+		var health_diff: int
+		
+		health_diff = -armor
+		health -= health_diff
 		armor = 0
+		check_for_death()
+		return true
 	
-	check_for_death()
-
+	return false
+	
 func check_for_death():
 	if health <= 0:
 		pass #away
