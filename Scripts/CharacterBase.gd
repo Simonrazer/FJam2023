@@ -57,7 +57,7 @@ func init_character(start_pos: Vector2):
 	armor = base_armor
 	health = base_health;
 	position_on_map = start_pos
-	actions = [true, true, true]
+	actions = [true, true, true] #maybe not necessary
 
 func start_new_round():
 	actions = [true, true, true]
@@ -145,3 +145,16 @@ func get_pos():
 
 func get_movement_stat():
 	return movement
+
+func get_actions():
+	return actions
+
+func get_action_range(action: Action):
+	
+	if action == Action.Damage or action == Action.Steal:
+		return damage_range
+	
+	if action == Action.Heal:
+		return heal_range
+	
+	return -1
