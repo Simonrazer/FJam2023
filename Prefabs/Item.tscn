@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bujfhsayryksk"]
+
+[ext_resource type="Texture2D" uid="uid://dtod4qm0qq3j6" path="res://icon.svg" id="1_1yoph"]
+
+[node name="Item" type="Control"]
+layout_mode = 3
+anchor_right = 0.303
+anchor_bottom = 0.535
+offset_right = -0.0559998
+offset_bottom = 0.319977
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 387.0
+offset_bottom = 380.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(67, 68)
+texture = ExtResource("1_1yoph")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 18.0
+offset_top = 137.0
+offset_right = 110.0
+offset_bottom = 163.0
+text = "ITEM_NAME"

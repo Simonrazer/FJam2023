@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmfo8pw46a6c4"]
+
+[ext_resource type="Script" path="res://Scripts/Shop.gd" id="1_kou2d"]
+[ext_resource type="PackedScene" uid="uid://bujfhsayryksk" path="res://Prefabs/Item.tscn" id="1_sgi1n"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_kou2d")
+
+[node name="Item" parent="." instance=ExtResource("1_sgi1n")]
+offset_left = 36.0
+offset_top = 17.0
+offset_right = 36.0
+offset_bottom = 17.32
