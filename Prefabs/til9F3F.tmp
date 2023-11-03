@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6jdb7kfe7alg"]
+
+[ext_resource type="Script" path="res://Scripts/TileScript.gd" id="1_srvfr"]
+[ext_resource type="Material" uid="uid://dv0o2qk5ib2pe" path="res://Prefabs/TileMaterial.tres" id="2_mogk1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_imhip"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_srvfr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.157956, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_mogk1")
+mesh = SubResource("BoxMesh_imhip")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://tw2dtvyrfqhl"]
+
+[sub_resource type="GDScript" id="GDScript_ywcyd"]
+script/source = "extends Node3D
+
+var scene = preload(\"res://Prefabs/tile.tscn\")
+
+func spawn_tile(type: String, pos: Vector3):
+	var instance = scene.instantiate()
+	instance.position = pos
+	instance.init(type)
+	add_child(instance)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	spawn_tile(\"bf\", Vector3(0,0,0))
+	spawn_tile(\"wf\", Vector3(1,0,0))
+	spawn_tile(\"be\", Vector3(0,0,1))
+	spawn_tile(\"we\", Vector3(-1,0,0))
+	spawn_tile(\"b_\", Vector3(1,0,1))
+	spawn_tile(\"w_\", Vector3(1,0,-1))
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="test" type="Node3D"]
+script = SubResource("GDScript_ywcyd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.413899, 0.910323, 0, -0.910323, 0.413899, 0, 1.63687, 0)
+
+[node name="Camera3D" type="Camera3D" parent="DirectionalLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.56752, 0.258036)

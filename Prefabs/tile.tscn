@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6jdb7kfe7alg"]
+[gd_scene load_steps=5 format=3 uid="uid://b6jdb7kfe7alg"]
+
+[ext_resource type="Script" path="res://Scripts/TileScript.gd" id="1_srvfr"]
+[ext_resource type="Material" uid="uid://dv0o2qk5ib2pe" path="res://Prefabs/we.tres" id="2_q27te"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_imhip"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihtg1"]
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_srvfr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.157956, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_q27te")
 mesh = SubResource("BoxMesh_imhip")
+surface_material_override/0 = SubResource("StandardMaterial3D_ihtg1")
