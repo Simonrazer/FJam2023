@@ -1,8 +1,10 @@
+
 [gd_scene load_steps=24 format=3 uid="uid://bomgaa4681vs6"]
+
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
-[ext_resource type="Environment" uid="uid://cxhusftkw8ual" path="res://Assets/MissionEvironment.tres" id="2_n5mk5"]
+[ext_resource type="Environment" uid="uid://cqbhq1u7jcmum" path="res://Assets/MissionEvironment.tres" id="2_n5mk5"]
 [ext_resource type="Texture2D" uid="uid://dh2xlww5g207b" path="res://Assets/openBox/openBox_wood2.png" id="3_3tu5j"]
 [ext_resource type="PackedScene" uid="uid://cewcrup88uvhm" path="res://Assets/stuhl/stuhl.glb" id="3_j8rl1"]
 [ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="4_ryjdu"]
@@ -17,10 +19,14 @@
 [ext_resource type="Material" uid="uid://mviuu52odkji" path="res://Assets/brickTex2/brick2Material.tres" id="13_tq4oc"]
 [ext_resource type="Material" uid="uid://qd7r2r17qc1c" path="res://Assets/woodTex/woodMat.tres" id="14_cw2ge"]
 [ext_resource type="PackedScene" uid="uid://ckpr50277l6p0" path="res://Assets/woddenBoxes/wooden_boxes.glb" id="15_8y134"]
+
 [ext_resource type="PackedScene" uid="uid://b030i8h8sh3j5" path="res://Assets/lamp.tscn" id="19_83bff"]
 [ext_resource type="PackedScene" uid="uid://cdjpuov2md3i3" path="res://Prefabs/CameraOrbito.tscn" id="20_innbc"]
 [ext_resource type="PackedScene" uid="uid://cumkk04g8f0ub" path="res://Assets/woddenBoxes/1box.tscn" id="20_sg008"]
 [ext_resource type="PackedScene" uid="uid://dl4rqywxen3r6" path="res://Assets/woddenBoxes/2box.tscn" id="21_1rvpg"]
+
+[ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="18_7mswy"]
+[ext_resource type="PackedScene" path="res://Assets/lamp.tscn" id="19_83bff"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 

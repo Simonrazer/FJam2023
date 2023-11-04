@@ -18,6 +18,27 @@ func _ready():
 	chara_scene = preload("res://Charas/Chara.tscn")
 	load_file(file)
 
+func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: CharacterBase.Character_Class):
+	var chara = chara_scene.instantiate()
+	chara.position = Vector3(pos.x, 0, pos.y)
+	add_child(chara)
+	chara.get_child(0).init_sprite(type)
+	
+	var entity: CharacterBase
+	match(type):
+		#friendly
+		CharacterBase.Character_Class.Brute: entity = TheBrute.new()
+		CharacterBase.Character_Class.Milo: entity = Milo.new()
+		#enemy
+		CharacterBase.Character_Class.Minion: entity = Minion.new()
+		CharacterBase.Character_Class.Hound: entity = Hound.new()
+		
+	entity.initChild()
+	entity.set_model(chara)
+	entity.init_character(pos)
+	if is_enemy: list_of_enemies.append(entity)
+	else: list_of_players.append(entity)
+
 func load_file(file):
 	var fileObj = FileAccess.open(file, FileAccess.READ)
 	var content:String = fileObj.get_as_text()
@@ -60,17 +81,7 @@ func load_file(file):
 			'B':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
-				
-				var chara = chara_scene.instantiate()
-				chara.position = Vector3(width, 0, height)
-				add_child(chara)
-				
-				var brute: CharacterBase
-				brute = TheBrute.new()
-				brute.initChild()
-				brute.set_model(chara)
-				brute.init_character(Vector2(width, height))
-				list_of_players.append(brute)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Brute)
 				width += 1;
 			'H':
 				ColStr += "f"
@@ -170,13 +181,14 @@ func color_range(action_length: int, center: Vector2):
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			
 			TileMatrix[tile_pos.x][tile_pos.y].highlight()
-			all_colored_tiles.append(TileMatrix[tile_pos.y][tile_pos.x])
+			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y])
+			
+			prints(TileMatrix[tile_pos.x][tile_pos.y])
 
 func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
 		tile.reset_color()
 	all_colored_tiles.clear()
-	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -259,6 +271,7 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 				clear_all_colored_tiles()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
+			print(len(all_colored_tiles))
 			clear_all_colored_tiles()
 			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])

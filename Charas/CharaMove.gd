@@ -1,10 +1,13 @@
-extends Node
+extends Sprite3D
 
 @export var updown_freq = 0.5
 @export var updown_amp = 0.1
 
 @export var updownH_freq = 100000
 @export var updownH_amp = 0.1
+
+var sprites: Array[CompressedTexture2D]
+var sprites_size: int = 20
 
 var _startpos
 var holo
@@ -14,6 +17,15 @@ func _ready():
 	_startpos = self.position
 	holo = get_node("Holo")
 	holo2 = get_node("Holo2")
+
+	#load all sprites
+	sprites.resize(sprites_size)
+	#friendly:
+	sprites[CharacterBase.Character_Class.Brute] = preload("res://Charas/Headshot_Brutus.png")
+	sprites[CharacterBase.Character_Class.Milo] = preload("res://Charas/Headshot_Milo.png")
+	#enemy:
+	sprites[CharacterBase.Character_Class.Minion] = preload("res://Charas/Schlager.png")
+	sprites[CharacterBase.Character_Class.Hound] = preload("res://Charas/Bluthund.png")
 	pass # Replace with function body.
 
 
@@ -26,3 +38,6 @@ func _process(delta):
 	holo.rotate(Vector3(0, 1, 0), 0.03)
 	holo2.rotate(Vector3(0, 1, 0), 0.035)
 	pass
+
+func init_sprite(desired_sprite: CharacterBase.Character_Class):
+	texture = sprites[desired_sprite]
