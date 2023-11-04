@@ -13,10 +13,22 @@ var Map_Height: int
 var list_of_players: Array[CharacterBase]
 var list_of_enemies: Array[CharacterBase]
 
+var buttons: Array[Button]
+
 func _ready():
 	tile_scene = preload("res://Prefabs/tile.tscn")
 	chara_scene = preload("res://Charas/Chara.tscn")
 	load_file(file)
+	buttons.resize(6)
+	init_buttons_array()
+
+func init_buttons_array():
+	buttons[0] = get_node("CanvasLayer/ColorRect/MoveButton")
+	buttons[1] = get_node("CanvasLayer/ColorRect/AttackButton")
+	buttons[2] = get_node("CanvasLayer/ColorRect/StealButton")
+	buttons[3] = get_node("CanvasLayer/ColorRect/HealButton")
+	buttons[4] = get_node("CanvasLayer/ColorRect/ClassButton")
+	buttons[5] = get_node("CanvasLayer/ColorRect/<ITEM>")
 
 func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: CharacterBase.Character_Class):
 	var chara = chara_scene.instantiate()
@@ -225,14 +237,13 @@ func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 					TileMatrix[tile.x][tile.y].highlight()
 					all_colored_tiles.append(TileMatrix[tile.x][tile.y])
 					
-					var moves_available: Array[bool] = current_selected_character.get_actions()
-					break
-
-			#	moveButton.setActive(moves_available[0])
-			#	healButton.setActive(moves_available[1])
-			#	stealButton.setActive(moves_available[1])
-			#	damageButton.setActive(moves_available[1])
-			#	classButton.setActive(moves_available[1])
+					var moves_available: Array[bool] = current_selected_character.get_actions()				
+					buttons[0].disabled = !moves_available[0]
+					buttons[1].disabled = !moves_available[1]
+					buttons[2].disabled = !moves_available[1]
+					buttons[3].disabled = !moves_available[1]
+					buttons[4].disabled = !moves_available[2]
+					buttons[5].disabled = !moves_available[2] #should be 3 -> CHANGE
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit
 			clear_all_colored_tiles()
