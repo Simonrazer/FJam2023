@@ -69,7 +69,7 @@ func move(new_pos: Vector2):
 		return false #ERROR
 	
 	position_on_map = new_pos
-	#TODO implement on squares -> Game controller?
+	#TODO implement on squares -> Game controller get new pos
 	actions[0] = false
 	return true
 
@@ -157,6 +157,9 @@ func get_movement_stat():
 
 func get_actions():
 	return actions
+
+func has_actions():
+	return actions[0] and actions[1] and actions[2]
 
 func get_action_range(action: Action):
 	
