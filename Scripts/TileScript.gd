@@ -12,7 +12,7 @@ var game_controller: GameController
 
 var color: String
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func initChild():
 	#rando = RandomNumberGenerator.new().randi()
 	pass # Replace with function body.
 

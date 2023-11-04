@@ -13,10 +13,22 @@ var Map_Height: int
 var list_of_players: Array[CharacterBase]
 var list_of_enemies: Array[CharacterBase]
 
+var buttons: Array[Button]
+
 func _ready():
 	tile_scene = preload("res://Prefabs/tile.tscn")
 	chara_scene = preload("res://Charas/Chara.tscn")
 	load_file(file)
+	buttons.resize(6)
+	init_buttons_array()
+
+func init_buttons_array():
+	buttons[0] = get_node("CanvasLayer/ColorRect/MoveButton")
+	buttons[1] = get_node("CanvasLayer/ColorRect/AttackButton")
+	buttons[2] = get_node("CanvasLayer/ColorRect/StealButton")
+	buttons[3] = get_node("CanvasLayer/ColorRect/HealButton")
+	buttons[4] = get_node("CanvasLayer/ColorRect/ClassButton")
+	buttons[5] = get_node("CanvasLayer/ColorRect/<ITEM>")
 
 func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: CharacterBase.Character_Class):
 	var chara = chara_scene.instantiate()
@@ -86,38 +98,47 @@ func load_file(file):
 			'H':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Hetzer)
 				width += 1;
 			'M':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Milo)
 				width += 1;
 			'R':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Rock)
 				width += 1;
 			'm':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Minion)
 				width += 1;
 			'h':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Hound)
 				width += 1;
 			's':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Soldier)
 				width += 1;
 			'a':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Archer)
 				width += 1;
 			'g':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.GangLeader)
 				width += 1;
 			'z':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Sucker)
 				width += 1;
 			'\n':
 				height = height + 1
@@ -161,6 +182,8 @@ enum ChangeTrigger {
 	Heal,
 	Steal,
 	Damage,
+	ClassAbility,
+	ItemUse,
 	EndRound,
 }
 
@@ -181,14 +204,13 @@ func color_range(action_length: int, center: Vector2):
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			
 			TileMatrix[tile_pos.x][tile_pos.y].highlight()
-			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y])
-			
-			prints(TileMatrix[tile_pos.x][tile_pos.y])
+			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y ])
 
 func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
 		tile.reset_color()
 	all_colored_tiles.clear()
+	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -206,12 +228,19 @@ func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
 		GameControlStates.PlayerMoving:
 			change_state_from_PlayerMoving(change, tile)
 		GameControlStates.PlayerHealing:
-			pass
+			change_state_from_PlayerHealing(change, tile)
 		GameControlStates.PlayerDamaging:
 			pass
 	
 	print("New State: ", GameControlStates.keys()[current_state])
 	print("")
+
+func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
+	match change:
+		ChangeTrigger.Heal:
+			pass
+		ChangeTrigger.Tile:
+			pass
 
 func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 	match change:
@@ -225,14 +254,13 @@ func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 					TileMatrix[tile.x][tile.y].highlight()
 					all_colored_tiles.append(TileMatrix[tile.x][tile.y])
 					
-					var moves_available: Array[bool] = current_selected_character.get_actions()
-					break
-
-			#	moveButton.setActive(moves_available[0])
-			#	healButton.setActive(moves_available[1])
-			#	stealButton.setActive(moves_available[1])
-			#	damageButton.setActive(moves_available[1])
-			#	classButton.setActive(moves_available[1])
+					var moves_available: Array[bool] = current_selected_character.get_actions()				
+					buttons[0].disabled = !moves_available[0]
+					buttons[1].disabled = !moves_available[1]
+					buttons[2].disabled = !moves_available[1]
+					buttons[3].disabled = !moves_available[1]
+					buttons[4].disabled = !moves_available[2]
+					buttons[5].disabled = !moves_available[2] #should be 3 -> CHANGE
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit
 			clear_all_colored_tiles()
@@ -271,7 +299,6 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 				clear_all_colored_tiles()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
-			print(len(all_colored_tiles))
 			clear_all_colored_tiles()
 			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
@@ -282,3 +309,21 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 
 func _move_btn_click():
 	change_state(ChangeTrigger.Move, Vector2())
+
+func _attack_btn_click():
+	change_state(ChangeTrigger.Damage, Vector2())
+
+func _steal_btn_click():
+	change_state(ChangeTrigger.Steal, Vector2())
+
+func _heal_btn_click():
+	change_state(ChangeTrigger.Heal, Vector2())
+
+func _class_btn_click():
+	change_state(ChangeTrigger.ClassAbility, Vector2())
+
+func _item_btn_click():
+	change_state(ChangeTrigger.ItemUse, Vector2())
+
+func _end_round_btn_click():
+	change_state(ChangeTrigger.EndRound, Vector2())
