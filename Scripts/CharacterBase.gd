@@ -67,8 +67,7 @@ func start_new_round():
 func move(new_pos: Vector2):
 	var move_vector = Vector2(new_pos.x - position_on_map.x, new_pos.y - position_on_map.y)
 	
-	if abs(move_vector.x) > movement or abs(move_vector.y) > movement:
-		return false #ERROR
+	if abs(move_vector.x * move_vector.x + move_vector.y * move_vector.y) > movement*movement: return false #ERROR
 	
 	position_on_map = new_pos
 	self.model.get_node("Sprite3D").doMove(Vector3(position_on_map.x, 0, position_on_map.y))
@@ -76,16 +75,16 @@ func move(new_pos: Vector2):
 	actions[0] = false
 	return true
 
-func do_action(target_pos: Vector2, action: Action):
+func do_action(target_pos: Vector2, action: Action, entity: CharacterBase):
 	var return_value: bool
 	
-	match Action:
+	match action:
 		Action.Damage:
-			return_value = attack_ability(target_pos, damage, false)
+			return_value = attack_ability(target_pos, damage, false, entity)
 		Action.Steal:
-			return_value = attack_ability(target_pos, steal, true)
+			return_value = attack_ability(target_pos, steal, true, entity)
 		Action.Heal:
-			return_value = heal_ability(target_pos)
+			return_value = heal_ability(target_pos, entity)
 	
 	if return_value == false:
 		return false
@@ -93,18 +92,15 @@ func do_action(target_pos: Vector2, action: Action):
 	actions[1] = false
 	return true
 
-func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool):
+func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool, entity: CharacterBase):
 	var diff_vector = Vector2(enemy_pos.x - position_on_map.x, enemy_pos.y - position_on_map.y)
 	
-	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range:
-		return false #ERROR
+	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range: return false #ERROR
+	if entity == null: return false
 
-	#TODO check if enemy else return false
-	#TODO get enemy CharacterBase
-	var return_value: bool = 0 
-	#TODO return value = enemy.take_damage(action_stat.x)
-	
-	if is_steal and not return_value:
+	var return_value: bool = false
+	return_value = entity.take_damage(action_stats.x)
+	if (action_stats.y <= 0) or (is_steal and not return_value):
 		health += action_stats.y
 	
 	check_for_death()
@@ -112,16 +108,14 @@ func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool):
 	return true
 	
 
-func heal_ability(ally_pos: Vector2):
+func heal_ability(ally_pos: Vector2, entity: CharacterBase):
 	var diff_vector = Vector2(ally_pos.x - position_on_map.x, ally_pos.y - position_on_map.y)
-	
-	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range:
-		return false #ERROR
-	
-	#TODO check if ally else return false
-	#TODO get ally CharacterBase
-	#TODO ally.get_healed(heal.x)
-	health -= heal.y
+
+	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range: return false #ERROR
+	if entity == null: return false
+
+	entity.get_healed(heal.x)
+	health += heal.y
 	check_for_death()
 	
 	return true
@@ -133,7 +127,7 @@ func get_healed(heal_to_get: int):
 	health += heal_to_get
 
 func take_damage(damage_to_take: int):
-	armor -= damage_to_take
+	armor += damage_to_take
 	
 	if armor < 0:
 		var health_diff: int
