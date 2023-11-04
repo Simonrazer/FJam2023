@@ -106,3 +106,102 @@ func addTile(width,height,type):
 	tile.set_color(type)
 	add_child(tile)
 	return tile;
+
+
+###
+### ATTENTION ------ STATE MACHINE BELOW
+###
+
+enum GameControlStates {
+	Start,
+	
+	PlayerRound,
+	PlayerInit,
+	PlayerSelected,
+	PlayerMoving,
+	PlayerHealing,
+	PlayerDamaging,
+	
+	EnemyRound,
+	EnemyInit,
+}
+
+enum ChangeTrigger {
+	Tile,
+	Move,
+	Heal,
+	Steal,
+	Damage,
+	EndRound,
+}
+
+@export var current_state: GameControlStates = GameControlStates.Start
+@export var current_selected_character: CharacterBase = null
+
+func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
+	match current_state:
+		GameControlStates.PlayerRound:
+			change_state_from_PlayerRound(change, tile)
+		GameControlStates.PlayerSelected:
+			change_state_from_PlayerSelected(change, tile)
+		GameControlStates.PlayerMoving:
+			pass
+		GameControlStates.PlayerHealing:
+			pass
+		GameControlStates.PlayerDamaging:
+			pass
+			
+
+func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
+	match change:
+		ChangeTrigger.Tile:
+			#if tile == player and player.has_moves():
+			#	current_state = GameControlStates.PlayerSelected
+			#	
+			#	color tile clicked
+			#	current_selected_character = player from list at tile pos
+			#	var moves_available: Array[bool] = current_selected_character.getMoves()
+			#	moveButton.setActive(moves_available[0])
+			#	healButton.setActive(moves_available[1])
+			#	stealButton.setActive(moves_available[1])
+			#	damageButton.setActive(moves_available[1])
+			#	classButton.setActive(moves_available[1])
+			pass 
+		ChangeTrigger.EndRound:
+			current_state = GameControlStates.EnemyInit
+
+func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
+	match change:
+		ChangeTrigger.Tile:
+			current_state = GameControlStates.PlayerRound
+			# revert color change of player tile
+			current_selected_character = null
+		ChangeTrigger.Move:
+			current_state = GameControlStates.PlayerMoving
+			var move_length: int = current_selected_character.get_movement_stat()
+			for i in range(-move_length, move_length):
+				for j in range(-move_length, move_length):
+					# color stuff, maybe save what has been colored? then one method to uncolor everything
+					pass
+		ChangeTrigger.Heal:
+			current_state = GameControlStates.PlayerHealing
+			var move_length: int = current_selected_character.get_action_range(CharacterBase.Action.Heal)
+			for i in range(-move_length, move_length):
+				for j in range(-move_length, move_length):
+					# color stuff, maybe save what has been colored? then one method to uncolor everything
+					# this is also used for steal and damage, give its own method?
+					pass
+		ChangeTrigger.Steal:
+			current_state = GameControlStates.PlayerDamaging
+		ChangeTrigger.Damage:
+			current_state = GameControlStates.PlayerDamaging
+		ChangeTrigger.EndRound:
+			current_state = GameControlStates.EnemyInit
+
+func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
+	match change:
+		ChangeTrigger.Tile:
+			if current_selected_character.move(tile):
+				pass
+			
+
