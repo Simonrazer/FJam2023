@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmpmukoy6orq1"]
+[gd_scene load_steps=6 format=3 uid="uid://bmpmukoy6orq1"]
 
 [ext_resource type="Texture2D" uid="uid://db0423br2cci2" path="res://Charas/Tank.png" id="1_uh050"]
 [ext_resource type="Script" path="res://Charas/CharaMove.gd" id="2_4qjpo"]
 [ext_resource type="Texture2D" uid="uid://du3cqr1o41irc" path="res://Charas/cccircular.svg" id="3_1ap75"]
 [ext_resource type="Texture2D" uid="uid://cypsdeok36e46" path="res://Charas/rectOutline.svg" id="4_wt2lh"]
 [ext_resource type="Texture2D" uid="uid://dwiaubxj1wjj4" path="res://Charas/HPCOL.png" id="5_o2mw8"]
-[ext_resource type="Texture2D" uid="uid://btr10u4qv0gxx" path="res://Charas/ARMORCOL.png" id="6_0xtbo"]
 
 [node name="Tank" type="Node3D"]
 
@@ -13,9 +12,9 @@
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0.734476, 0)
 billboard = 2
 transparent = false
-double_sided = false
 texture = ExtResource("1_uh050")
 script = ExtResource("2_4qjpo")
+updown_freq = null
 updown_amp = 0.07
 updownH_freq = 3
 updownH_amp = 1.01
@@ -31,21 +30,14 @@ modulate = Color(0.945098, 0.254902, 0.415686, 1)
 texture = ExtResource("3_1ap75")
 
 [node name="HPOutL" type="Sprite3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 0.37594, 0, 0, 0, 1, 0, 6.3, 0)
+transform = Transform3D(1, 0, 0, 0, 0.37594, 0, 0, 0, 1, -0.387635, 6.43357, 0)
 billboard = 2
 texture = ExtResource("4_wt2lh")
 
 [node name="HPScaler" type="Node3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03308, 6.39415, 0)
 
 [node name="HP" type="Sprite3D" parent="Sprite3D/HPScaler"]
-transform = Transform3D(998.857, 0, 0, 0, 114.057, 0, 0, 0, 7.407, 0, 0, 0)
+transform = Transform3D(998.857, 0, 0, 0, 114.057, 0, 0, 0, 7.407, 5.06132, 0.0496864, 0.0166469)
 billboard = 2
 texture = ExtResource("5_o2mw8")
-
-[node name="ArmorPacks" type="Sprite3D" parent="Sprite3D"]
-transform = Transform3D(130, 0, 0, 0, 114.057, 0, 0, 0, 7.407, 0, 7.78331, 0)
-billboard = 2
-texture_filter = 0
-texture = ExtResource("6_0xtbo")
-vframes = 5

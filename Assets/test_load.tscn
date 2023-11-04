@@ -32,7 +32,7 @@ albedo_texture = ExtResource("3_3tu5j")
 script = ExtResource("1_tqucb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(11.8746, 0, 0, 0, 3.22522, 0, 0, 0, 13.8889, 2.63323, 0, 4.88654)
+transform = Transform3D(11.8746, 0, 0, 0, 3.22522, 0, 0, 0, 13.8889, 2.63323, 0, 3.72685)
 material_override = ExtResource("2_g42lx")
 mesh = SubResource("PlaneMesh_geb3c")
 
@@ -74,7 +74,7 @@ transform = Transform3D(0.780544, 0, 0, 0, 0.780544, 0, 0, 0, 0.780544, 4.94276,
 transform = Transform3D(-0.780307, 0, -0.0192338, 0, 0.780544, 0, 0.0192338, 0, -0.780307, 4.94276, 0.72262, 1.67943)
 
 [node name="workbench5" parent="." instance=ExtResource("7_qvyw6")]
-transform = Transform3D(-0.780307, 0, -0.0192338, -0.00999205, 0.66695, 0.405373, 0.0164347, 0.405496, -0.666748, 4.94276, 0.257291, 5.3175)
+transform = Transform3D(-0.780307, -6.21146e-10, -0.0192338, -0.0046508, 0.757382, 0.188681, 0.0186631, 0.188738, -0.757152, 4.94276, 0.257291, 5.3175)
 
 [node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
 transform = Transform3D(0.425224, 0, 0, 0, 0.425224, 0, 0, 0, 0.425224, -0.735944, 0.318442, -1.75128)
@@ -149,12 +149,12 @@ size = Vector3(0.942536, 17.1876, 0.382733)
 [node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.5179, 2.06895, 5.16448)
 material_override = ExtResource("13_tq4oc")
-size = Vector3(16.3783, 5.56497, 1)
+size = Vector3(22.8728, 5.56497, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.90181, 2.15587, 6.63695)
 material_override = ExtResource("12_1ia3i")
-size = Vector3(19.3183, 5.56497, 1)
+size = Vector3(30, 5.56497, 1)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.227745, 1.21108, -3.41511)
@@ -162,7 +162,7 @@ material_override = ExtResource("12_1ia3i")
 size = Vector3(23.7622, 7.82098, 1.45106)
 
 [node name="CameraOrbito" parent="." instance=ExtResource("20_innbc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.04152, -0.339811, 2.89139)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.04152, -0.339811, 1.7317)
 
 [node name="wooden_boxes2" parent="." instance=ExtResource("20_sg008")]
 transform = Transform3D(0.83665, 0, 0.547738, 0, 1, 0, -0.547738, 0, 0.83665, 1.99573, -3.57628e-07, -0.901726)

@@ -71,7 +71,6 @@ func move(new_pos: Vector2):
 	
 	position_on_map = new_pos
 	self.model.get_node("Sprite3D").doMove(Vector3(position_on_map.x, 0, position_on_map.y))
-	#TODO implement on squares -> Game controller get new pos
 	actions[0] = false
 	return true
 
@@ -128,12 +127,13 @@ func get_healed(heal_to_get: int):
 
 func take_damage(damage_to_take: int):
 	armor += damage_to_take
-	
+	model.get_node("Sprite3D").set_armor(max(0, armor))
 	if armor < 0:
 		var health_diff: int
 		
 		health_diff = -armor
 		health -= health_diff
+		model.get_node("Sprite3D").hpScale(float(health)/max(health, base_health))
 		armor = 0
 		check_for_death()
 		return true
@@ -146,6 +146,7 @@ func check_for_death():
 
 func set_model(n_model: Node3D):
 	model = n_model
+	model.get_node("Sprite3D").set_armor(armor)
 
 #GET FUNCTIONS FOR GAME CONTROLLER
 func get_pos():

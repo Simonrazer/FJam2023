@@ -11,6 +11,6 @@ transform = Transform3D(1, 0, 0, 0, 0.918805, 0.394712, 0, -0.394712, 0.918805, 
 script = ExtResource("1_opsbc")
 SCROLL_SPEED = 4.46
 ZOOM_SPEED = 3.86
-DEFAULT_DISTANCE = 4.94
+DEFAULT_DISTANCE = 7.835
 ROTATE_SPEED = 0.545
 ANCHOR_NODE_PATH = NodePath("..")

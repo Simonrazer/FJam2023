@@ -17,11 +17,14 @@ var movin = false
 var moveTo
 var counter = 0
 var startPos
+
+var hpscale:Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_startpos = self.position
 	holo = get_node("Holo")
 	holo2 = get_node("Holo2")
+	hpscale = get_node("HPScaler")
 
 	#load all sprites
 	sprites.resize(sprites_size)
@@ -53,6 +56,9 @@ func _process(delta):
 			movin = false
 	pass
 
+func hpScale(perc):
+	hpscale.set_scale(Vector3(perc,1,1))
+
 func doMove(newPos:Vector3):
 	movin = true
 	startPos = global_position
@@ -60,3 +66,8 @@ func doMove(newPos:Vector3):
 
 func init_sprite(desired_sprite: CharacterBase.Character_Class):
 	texture = sprites[desired_sprite]
+	pixel_size *= 768 / float(texture.get_width())
+
+func set_armor(armor: int):
+	print(armor)
+	get_node("ArmorPacks").frame = 4 - armor

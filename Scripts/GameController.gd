@@ -14,21 +14,49 @@ var list_of_players: Array[CharacterBase]
 var list_of_enemies: Array[CharacterBase]
 
 var buttons: Array[Button]
+var end_round_button: Button
 
+var sprites: Array[CompressedTexture2D]
+var sprites_size: int = 20
 func _ready():
+	sprites.resize(sprites_size)
+	#friendly:
+	sprites[CharacterBase.Character_Class.Brute] = preload("res://Charas/Headshot_Brutus.png")
+	sprites[CharacterBase.Character_Class.Milo] = preload("res://Charas/Headshot_Milo.png")
+	#enemy:
+	sprites[CharacterBase.Character_Class.Minion] = preload("res://Charas/Schlager.png")
+	sprites[CharacterBase.Character_Class.Hound] = preload("res://Charas/Bluthund.png")
 	tile_scene = preload("res://Prefabs/tile.tscn")
 	chara_scene = preload("res://Charas/Chara.tscn")
 	load_file(file)
 	buttons.resize(6)
 	init_buttons_array()
 
+var lastChar:CharacterBase = null
+func _process(delta):
+	if lastChar != current_selected_character:
+		lastChar = current_selected_character
+		if lastChar == null: 
+			get_node("UI/CanvasLayer/ColorRect/currentImg").texture = null
+		else:
+			get_node("UI/CanvasLayer/ColorRect/currentImg").texture = sprites[current_selected_character.character_class]
+			get_node("UI/CanvasLayer/ColorRect/currentImg").size = Vector2(100,100)
 func init_buttons_array():
-	buttons[0] = get_node("CanvasLayer/ColorRect/MoveButton")
-	buttons[1] = get_node("CanvasLayer/ColorRect/AttackButton")
-	buttons[2] = get_node("CanvasLayer/ColorRect/StealButton")
-	buttons[3] = get_node("CanvasLayer/ColorRect/HealButton")
-	buttons[4] = get_node("CanvasLayer/ColorRect/ClassButton")
-	buttons[5] = get_node("CanvasLayer/ColorRect/<ITEM>")
+	buttons[0] = get_node("UI/CanvasLayer/ColorRect/MoveButton")
+	buttons[0].button_down.connect(_move_btn_click)
+	buttons[1] = get_node("UI/CanvasLayer/ColorRect/AttackButton")
+	buttons[1].button_down.connect(_attack_btn_click)
+	buttons[2] = get_node("UI/CanvasLayer/ColorRect/StealButton")
+	buttons[2].button_down.connect(_steal_btn_click)
+	buttons[3] = get_node("UI/CanvasLayer/ColorRect/HealButton")
+	buttons[3].button_down.connect(_heal_btn_click)
+	buttons[4] = get_node("UI/CanvasLayer/ColorRect/ClassButton")
+	buttons[4].button_down.connect(_class_btn_click)
+	buttons[5] = get_node("UI/CanvasLayer/ColorRect/<ITEM>")
+	buttons[5].button_down.connect(_item_btn_click)
+	
+	end_round_button = get_node("UI/CanvasLayer/EndRoundButton")
+	end_round_button.button_down.connect(_end_round_btn_click)
 
 func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: CharacterBase.Character_Class):
 	var chara = chara_scene.instantiate()
@@ -46,8 +74,8 @@ func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: Char
 		CharacterBase.Character_Class.Hound: entity = Hound.new()
 		
 	entity.initChild()
-	entity.set_model(chara)
 	entity.init_character(pos)
+	entity.set_model(chara)
 	if is_enemy: list_of_enemies.append(entity)
 	else: list_of_players.append(entity)
 
@@ -218,6 +246,11 @@ func check_for_any_moves():
 	for player in list_of_players:
 		if player.has_actions(): return true
 
+func end_round_function():
+	clear_all_colored_tiles()
+	current_selected_character = null
+	current_state = GameControlStates.EnemyInit
+
 func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
 	for entity in list:
 		if entity.get_pos() == pos: return entity
@@ -266,8 +299,7 @@ func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 					buttons[5].disabled = !moves_available[2] #should be 3 -> CHANGE
 					
 		ChangeTrigger.EndRound:
-			current_state = GameControlStates.EnemyInit
-			clear_all_colored_tiles()
+			end_round_function()
 
 func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 	match change:
@@ -289,8 +321,7 @@ func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 			current_state = GameControlStates.PlayerDamaging
 			color_range(current_selected_character.get_action_range(CharacterBase.Action.Damage), current_selected_character.get_pos())
 		ChangeTrigger.EndRound:
-			current_state = GameControlStates.EnemyInit
-			clear_all_colored_tiles()
+			end_round_function()
 
 func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 	match change:
@@ -301,11 +332,11 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 			if get_possible_enemy != null or get_possible_player != null: return
 			
 			if current_selected_character.move(tile):
-				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
-				else: current_state = GameControlStates.EnemyInit
 				TileMatrix[tile.x][tile.y].change_color("f")
 				TileMatrix[original_pos.x][original_pos.y].change_color("_")
 				clear_all_colored_tiles()
+				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
+				else: end_round_function()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
 			clear_all_colored_tiles()
@@ -313,8 +344,7 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
 			
 		ChangeTrigger.EndRound:
-			current_state = GameControlStates.EnemyInit
-			clear_all_colored_tiles()
+			end_round_function()
 
 func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
 	match change:
@@ -327,8 +357,11 @@ func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
 			var entity: CharacterBase = get_entity_at_pos(tile, list_of_players)
 			if current_selected_character.do_action(tile, CharacterBase.Action.Heal, entity):
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
-				else: current_state = GameControlStates.EnemyInit
+				else: end_round_function()
 				clear_all_colored_tiles()
+		ChangeTrigger.EndRound:
+			end_round_function()
+			
 
 func change_state_from_PlayerDamaging(change: ChangeTrigger, tile: Vector2):
 	match change:
@@ -341,8 +374,10 @@ func change_state_from_PlayerDamaging(change: ChangeTrigger, tile: Vector2):
 			var entity: CharacterBase = get_entity_at_pos(tile, list_of_enemies)
 			if current_selected_character.do_action(tile, CharacterBase.Action.Damage, entity):
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
-				else: current_state = GameControlStates.EnemyInit
+				else: end_round_function()
 				clear_all_colored_tiles()
+		ChangeTrigger.EndRound:
+			end_round_function()
 				
 func change_state_from_PlayerStealing(change: ChangeTrigger, tile: Vector2):
 	match change:
@@ -353,12 +388,12 @@ func change_state_from_PlayerStealing(change: ChangeTrigger, tile: Vector2):
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
 		ChangeTrigger.Tile:
 			var entity: CharacterBase = get_entity_at_pos(tile, list_of_enemies)
-			print("enemy before: ", entity.armor, " ", entity.health)
 			if current_selected_character.do_action(tile, CharacterBase.Action.Steal, entity):
-				print("enemy after: ", entity.armor, " ", entity.health)
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
-				else: current_state = GameControlStates.EnemyInit
+				else: end_round_function()
 				clear_all_colored_tiles()
+		ChangeTrigger.EndRound:
+			end_round_function()
 
 #ALL BUTTON FUNCTIONS
 func _move_btn_click():
