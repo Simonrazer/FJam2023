@@ -59,7 +59,7 @@ transform = Transform3D(1.59077, 0, 0, 0, 1.59077, 0, 0, 0, 1.59077, 0.711998, 0
 transform = Transform3D(0.631694, 0, 0, 0, 0.631694, 0, 0, 0, 0.631694, 7.90947, -0.0594094, 7.4319)
 
 [node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
-transform = Transform3D(0.425224, 0, 0, 0, 0.425224, 0, 0, 0, 0.425224, 3.32348, 0.453121, 3.5234)
+transform = Transform3D(0.425224, 0, 0, 0, 0.425224, 0, 0, 0, 0.425224, 0, 0, 0)
 
 [node name="vise" parent="." instance=ExtResource("9_f7775")]
 transform = Transform3D(0.0619034, 0, 0, 0, 0.0619034, 0, 0, 0, 0.0619034, 2.01445, 0.493294, 8.81635)
@@ -71,7 +71,7 @@ transform = Transform3D(0.652565, 0, 0, 0, 0.652565, 0, 0, 0, 0.652565, 4.42466,
 transform = Transform3D(-1.96095e-08, -0.448614, -1.96095e-08, 0, -1.96095e-08, 0.448614, -0.448614, 1.96095e-08, 8.57159e-16, -1.52045, 1.35759, 5.59537)
 
 [node name="wooden_boxes" parent="." instance=ExtResource("15_8y134")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42003, -1.19209e-07, 4.51707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.63443, -1.19209e-07, 5.99755)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_n5mk5")
@@ -91,10 +91,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95359, 3.83768, 6.89067)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44641, 3.66134, 4.08053)
 
 [node name="Anchor" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20206, 0, 4.08053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11103, 1.07476, 4.16343)
 
 [node name="OrbitCamera" type="Camera3D" parent="Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65081, 4.38897)
+transform = Transform3D(1, 0, 0, 0, 0.918805, 0.394712, 0, -0.394712, 0.918805, 0, 1.65081, 4.38897)
 script = ExtResource("18_7mswy")
 SCROLL_SPEED = 4.46
 ZOOM_SPEED = 3.86
@@ -197,17 +197,17 @@ material_override = ExtResource("14_cw2ge")
 size = Vector3(0.942536, 13.1703, 0.382733)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.2705, 2.06895, 6.72418)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.2705, 2.06895, 5.16448)
 material_override = ExtResource("13_tq4oc")
-size = Vector3(14.2366, 5.56497, 1)
+size = Vector3(16.3783, 5.56497, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2189, 2.15587, 6.63695)
 material_override = ExtResource("12_1ia3i")
-size = Vector3(15.6966, 5.56497, 1)
+size = Vector3(19.3183, 5.56497, 1)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.227745, 1.21108, -0.41511)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.227745, 1.21108, -3.41511)
 material_override = ExtResource("12_1ia3i")
 size = Vector3(21.698, 16.0812, 1)
 

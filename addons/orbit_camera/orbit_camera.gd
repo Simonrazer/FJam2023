@@ -25,9 +25,9 @@ var _anchor_node: Node3D
 func _ready():
 	_distance = DEFAULT_DISTANCE
 	_anchor_node = self.get_node(ANCHOR_NODE_PATH)
-	print(_anchor_node.position)
 	_rotation = _anchor_node.transform.basis.get_rotation_quaternion().get_euler()
-
+	_setinitial(Vector2(0,0.5))
+	
 func _process(delta: float):
 	if is_zoom_in:
 		_scroll_speed = -1 * ZOOM_SPEED
@@ -37,7 +37,7 @@ func _process(delta: float):
 
 func _process_transformation(delta: float):
 	# Update rotation
-	_rotation.x += -_move_speed.y * delta * ROTATE_SPEED
+	#_rotation.x += -_move_speed.y * delta * ROTATE_SPEED
 	_rotation.y += -_move_speed.x * delta * ROTATE_SPEED
 	if _rotation.x < -PI/2:
 		_rotation.x = -PI/2
@@ -58,10 +58,26 @@ func _process_transformation(delta: float):
 	_anchor_node.transform.basis = Basis(Quaternion.from_euler(_rotation))
 	_anchor_node.position = ap
 
+func _setinitial(pos: Vector2):
+	# Update rotation
+	_rotation.x += -pos.y
+	_rotation.y += -pos.x
+	if _rotation.x < -PI/2:
+		_rotation.x = -PI/2
+	if _rotation.x > PI/2:
+		_rotation.x = PI/2
+	_move_speed = Vector2()
+
+	
+	self.set_identity()
+	self.translate_object_local(Vector3(0,0,_distance))
+	var ap = _anchor_node.position
+	_anchor_node.set_identity()
+	_anchor_node.transform.basis = Basis(Quaternion.from_euler(_rotation))
+	_anchor_node.position = ap
+
 func _input(event):
-	if event is InputEventScreenDrag:
-		_process_touch_rotation_event(event)
-	elif event is InputEventMouseMotion:
+	if event is InputEventMouseMotion:
 		_process_mouse_rotation_event(event)
 	elif event is InputEventMouseButton:
 		_process_mouse_scroll_event(event)
@@ -78,20 +94,6 @@ func _process_mouse_scroll_event(e: InputEventMouseButton):
 	elif e.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		_scroll_speed = 1 * SCROLL_SPEED
 
-func _process_touch_rotation_event(e: InputEventScreenDrag):
-	if _touches.has(e.index):
-		_touches[e.index] = e.position
-	if _touches.size() == 2:
-		var _keys = _touches.keys()
-		var _pos_finger_1 = _touches[_keys[0]] as Vector2
-		var _pos_finger_2 = _touches[_keys[1]] as Vector2
-		var _dist = _pos_finger_1.distance_to(_pos_finger_2)
-		if _old_touche_dist != -1:
-			_scroll_speed = (_dist - _old_touche_dist) * MOUSE_ZOOM_SPEED
-		_old_touche_dist = _dist
-	elif _touches.size() < 2:
-		_old_touche_dist = -1
-		_move_speed = e.relative
 	
 func _process_touch_zoom_event(e: InputEventScreenTouch):
 	if e.pressed:
