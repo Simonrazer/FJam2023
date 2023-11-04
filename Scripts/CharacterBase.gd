@@ -25,6 +25,7 @@ enum Action {
 @export_category("Class")
 @export var character_class: Character_Class
 @export var is_playable: bool
+@export var model: Node3D
 
 @export_category("Base stats")
 @export var base_health: int  
@@ -146,6 +147,9 @@ func take_damage(damage_to_take: int):
 func check_for_death():
 	if health <= 0:
 		pass #away
+
+func set_model(n_model: Node3D):
+	model = n_model
 
 #GET FUNCTIONS FOR GAME CONTROLLER
 func get_pos():

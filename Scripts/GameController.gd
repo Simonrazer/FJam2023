@@ -2,7 +2,10 @@ class_name GameController extends Node3D
 
 @onready var file = 'res://Maps/map1.txt'
 
+
+
 var tile_scene
+var chara_scene
 var TileMatrix=[] # oben (0,0) nach unten (1, 0) nach rechts (0,1)
 var Map_Width: int
 var Map_Height: int
@@ -12,6 +15,7 @@ var list_of_enemies: Array[CharacterBase]
 
 func _ready():
 	tile_scene = preload("res://Prefabs/tile.tscn")
+	chara_scene = preload("res://Charas/Chara.tscn")
 	load_file(file)
 
 func load_file(file):
@@ -56,9 +60,15 @@ func load_file(file):
 			'B':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				
+				var chara = chara_scene.instantiate()
+				chara.position = Vector3(width, 0, height)
+				add_child(chara)
+				
 				var brute: CharacterBase
 				brute = TheBrute.new()
 				brute.initChild()
+				brute.set_model(chara)
 				brute.init_character(Vector2(width, height))
 				list_of_players.append(brute)
 				width += 1;
@@ -242,6 +252,8 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
 			if current_selected_character.move(tile):
+				
+				current_selected_character.model.position = Vector3(current_selected_character.get_pos().x, 0, current_selected_character.get_pos().y)
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
 				else: current_state = GameControlStates.EnemyInit
 				clear_all_colored_tiles()
