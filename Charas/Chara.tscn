@@ -30,6 +30,7 @@ texture = ExtResource("3_1ap75")
 
 [node name="HPOutL" type="Sprite3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 0.37594, 0, 0, 0, 1, -0.387635, 6.43357, 0)
+billboard = 2
 texture = ExtResource("4_wt2lh")
 
 [node name="HPScaler" type="Node3D" parent="Sprite3D"]
@@ -37,4 +38,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03308, 6.39415, 0)
 
 [node name="HP" type="Sprite3D" parent="Sprite3D/HPScaler"]
 transform = Transform3D(998.857, 0, 0, 0, 114.057, 0, 0, 0, 7.407, 5.06132, 0.0496864, 0.0166469)
+billboard = 2
 texture = ExtResource("5_o2mw8")
