@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bv68ewptipjox"]
+
+[ext_resource type="Texture2D" uid="uid://b4n4lg7e1gubf" path="res://Assets/brickTex/double_brick_floor_diff_1k.jpg" id="1_uxtfs"]
+[ext_resource type="Texture2D" uid="uid://d28liy6elq7i5" path="res://Assets/brickTex/double_brick_floor_disp_1k.jpg" id="2_t2nr6"]
+[ext_resource type="Texture2D" uid="uid://cxqvq2nfsahqq" path="res://Assets/brickTex/double_brick_floor_rough_1k.jpg" id="3_m717i"]
+
+[resource]
+albedo_texture = ExtResource("1_uxtfs")
+roughness_texture = ExtResource("3_m717i")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_t2nr6")

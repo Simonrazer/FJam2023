@@ -5,6 +5,8 @@ extends Control
 func _ready():
 	pass # Replace with function body.
 
+func init():
+	var n = 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

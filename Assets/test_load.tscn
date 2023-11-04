@@ -1,18 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://bomgaa4681vs6"]
+[gd_scene load_steps=19 format=3 uid="uid://bomgaa4681vs6"]
 
 [ext_resource type="Script" path="res://Scripts/LoadMap.gd" id="1_0t8km"]
 [ext_resource type="Texture2D" uid="uid://cyisx7arw4jtv" path="res://Assets/bigcheck.png" id="2_v11vc"]
+[ext_resource type="PackedScene" uid="uid://cewcrup88uvhm" path="res://Assets/stuhl/stuhl.glb" id="3_j8rl1"]
+[ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="4_ryjdu"]
+[ext_resource type="PackedScene" uid="uid://dr1msdak8u12k" path="res://Assets/crate1/a_wooden_crate.glb" id="5_l2yhs"]
+[ext_resource type="PackedScene" uid="uid://hgb3783wuv70" path="res://Assets/bench1/wb.glb" id="6_1e4o5"]
+[ext_resource type="PackedScene" uid="uid://b1vlpabop3m55" path="res://Assets/bench2/workbench.glb" id="7_qvyw6"]
+[ext_resource type="PackedScene" uid="uid://c3c5tkmuow5dl" path="res://Assets/openBox/openBox.glb" id="8_uqxx8"]
+[ext_resource type="PackedScene" uid="uid://dy22x4tyretpp" path="res://Assets/vice/vise.glb" id="9_f7775"]
+[ext_resource type="PackedScene" uid="uid://b8bbg7welc67j" path="res://Assets/bench3/workbench2.glb" id="10_wd261"]
+[ext_resource type="PackedScene" uid="uid://cbfotnwnvq05c" path="res://Assets/pipes/change1.tscn" id="11_v2hx8"]
+[ext_resource type="Material" uid="uid://bv68ewptipjox" path="res://Assets/brickTex/brickMaterial.tres" id="12_1ia3i"]
+[ext_resource type="Material" uid="uid://mviuu52odkji" path="res://Assets/brickTex2/brick2Material.tres" id="13_tq4oc"]
+[ext_resource type="Material" uid="uid://qd7r2r17qc1c" path="res://Assets/woodTex/woodMat.tres" id="14_cw2ge"]
+[ext_resource type="PackedScene" uid="uid://ckpr50277l6p0" path="res://Assets/woddenBoxes/wooden_boxes.glb" id="15_8y134"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7lkf"]
 albedo_texture = ExtResource("2_v11vc")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_ch48n"]
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_0t8km")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.303534, 0.952821, 0, -0.952821, 0.303534, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.303534, 0.952821, 0, -0.952821, 0.303534, -8.98212, 0, 2.63364)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.012, 4.12752, 0)
@@ -21,3 +36,48 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.012,
 transform = Transform3D(18, 0, 0, 0, 18, 0, 0, 0, 18, -0.0489423, 0, 0.0870619)
 material_override = SubResource("StandardMaterial3D_w7lkf")
 mesh = SubResource("PlaneMesh_geb3c")
+
+[node name="stuhl" parent="." instance=ExtResource("3_j8rl1")]
+transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 0.914607, 0.0200481, 0.679031)
+
+[node name="chest" parent="." instance=ExtResource("4_ryjdu")]
+transform = Transform3D(1.79, 0, 0, 0, 1.79, 0, 0, 0, 1.79, -1.88577, 0, -2.88787)
+
+[node name="a_wooden_crate" parent="." instance=ExtResource("5_l2yhs")]
+transform = Transform3D(5.05, 0, 0, 0, 5.05, 0, 0, 0, 5.05, 1.37205, 0, 2.34375)
+
+[node name="wb" parent="." instance=ExtResource("6_1e4o5")]
+transform = Transform3D(2.775, 0, 0, 0, 2.775, 0, 0, 0, 2.775, 3.04977, 0.0179993, -3.76051)
+
+[node name="workbench" parent="." instance=ExtResource("7_qvyw6")]
+transform = Transform3D(1.715, 0, 0, 0, 1.715, 0, 0, 0, 1.715, -7.89073, 0, 4.50109)
+
+[node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.12113, 1.06595, -1.42469)
+
+[node name="vise" parent="." instance=ExtResource("9_f7775")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23196, 0, -0.103683)
+
+[node name="workbench2" parent="." instance=ExtResource("10_wd261")]
+transform = Transform3D(2.53, 0, 0, 0, 2.53, 0, 0, 0, 2.53, 9.34226, 0, -7.64964)
+
+[node name="modular_sewer_pipes" parent="." instance=ExtResource("11_v2hx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.69134, 5.71799, -1.07068)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(14.165, 0, 0, 0, 14.165, 0, 0, 0, 14.165, 0, -0.276623, -33.0156)
+material_override = ExtResource("12_1ia3i")
+mesh = SubResource("PlaneMesh_ch48n")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(14.165, 0, 0, 0, 14.165, 0, 0, 0, 14.165, 33.748, -0.276623, -33.0156)
+material_override = ExtResource("13_tq4oc")
+mesh = SubResource("PlaneMesh_ch48n")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(14.165, 0, 0, 0, 14.165, 0, 0, 0, 14.165, 33.748, -0.276623, 4.07491)
+material_override = ExtResource("14_cw2ge")
+mesh = SubResource("PlaneMesh_ch48n")
+
+[node name="wooden_boxes" parent="." instance=ExtResource("15_8y134")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13582, 0, -0.760515)
