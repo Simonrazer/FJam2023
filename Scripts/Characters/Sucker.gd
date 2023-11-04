@@ -13,7 +13,7 @@ class_name Sucker extends CharacterBase
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func initChild():
 	character_class = Character_Class.Sucker
 	is_playable = false
 	

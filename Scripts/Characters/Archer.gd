@@ -13,7 +13,7 @@ class_name Minion extends CharacterBase
 @export var minion_base_heal_range: int = 1
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func initChild():
 	character_class = Character_Class.Minion
 	is_playable = false
 	

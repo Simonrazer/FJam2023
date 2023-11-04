@@ -86,38 +86,47 @@ func load_file(file):
 			'H':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Hetzer)
 				width += 1;
 			'M':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Milo)
 				width += 1;
 			'R':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Rock)
 				width += 1;
 			'm':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Minion)
 				width += 1;
 			'h':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Hound)
 				width += 1;
 			's':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Soldier)
 				width += 1;
 			'a':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Archer)
 				width += 1;
 			'g':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.GangLeader)
 				width += 1;
 			'z':
 				ColStr += "e"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), true, ColStr, CharacterBase.Character_Class.Sucker)
 				width += 1;
 			'\n':
 				height = height + 1
@@ -181,14 +190,13 @@ func color_range(action_length: int, center: Vector2):
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			
 			TileMatrix[tile_pos.x][tile_pos.y].highlight()
-			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y])
-			
-			prints(TileMatrix[tile_pos.x][tile_pos.y])
+			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y ])
 
 func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
 		tile.reset_color()
 	all_colored_tiles.clear()
+	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -206,12 +214,19 @@ func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
 		GameControlStates.PlayerMoving:
 			change_state_from_PlayerMoving(change, tile)
 		GameControlStates.PlayerHealing:
-			pass
+			change_state_from_PlayerHealing(change, tile)
 		GameControlStates.PlayerDamaging:
 			pass
 	
 	print("New State: ", GameControlStates.keys()[current_state])
 	print("")
+
+func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
+	match change:
+		ChangeTrigger.Heal:
+			pass
+		ChangeTrigger.Tile:
+			pass
 
 func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 	match change:
@@ -271,7 +286,6 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 				clear_all_colored_tiles()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
-			print(len(all_colored_tiles))
 			clear_all_colored_tiles()
 			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
