@@ -9,3 +9,5 @@ albedo_texture = ExtResource("1_mgnpo")
 roughness_texture = ExtResource("3_mswsx")
 heightmap_enabled = true
 heightmap_texture = ExtResource("2_dqhkq")
+uv1_scale = Vector3(0.37, 0.37, 0.37)
+uv1_triplanar = true

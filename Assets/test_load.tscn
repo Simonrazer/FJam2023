@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bomgaa4681vs6"]
+[gd_scene load_steps=22 format=3 uid="uid://bomgaa4681vs6"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
 [ext_resource type="Environment" uid="uid://cxhusftkw8ual" path="res://Assets/MissionEvironment.tres" id="2_n5mk5"]
+[ext_resource type="Texture2D" uid="uid://dh2xlww5g207b" path="res://Assets/openBox/openBox_wood2.png" id="3_3tu5j"]
 [ext_resource type="PackedScene" uid="uid://cewcrup88uvhm" path="res://Assets/stuhl/stuhl.glb" id="3_j8rl1"]
 [ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="4_ryjdu"]
 [ext_resource type="PackedScene" uid="uid://dr1msdak8u12k" path="res://Assets/crate1/a_wooden_crate.glb" id="5_l2yhs"]
@@ -21,73 +22,59 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ch48n"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pydnp"]
+albedo_texture = ExtResource("3_3tu5j")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_tqucb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(8.42828, 0, 0, 0, 3.22522, 0, 0, 0, 8.60494, 2.63323, 0, 0.30022)
+transform = Transform3D(8.42828, 0, 0, 0, 3.22522, 0, 0, 0, 13.8889, 2.63323, 0, 4.88654)
 material_override = ExtResource("2_g42lx")
 mesh = SubResource("PlaneMesh_geb3c")
 
-[node name="stuhl" parent="." instance=ExtResource("3_j8rl1")]
-transform = Transform3D(0.0601782, 0.00013982, -1.96342e-05, -0.000139789, 0.0601782, 9.30798e-05, 1.98496e-05, -9.30338e-05, 0.0601782, 2.33108, -0.0185786, -4.73249)
-
-[node name="chest" parent="." instance=ExtResource("4_ryjdu")]
-transform = Transform3D(0.685606, 0, 0, 0, 0.685606, 0, 0, 0, 0.685606, 0.326235, 0.00527167, -5.93227)
-
-[node name="a_wooden_crate" parent="." instance=ExtResource("5_l2yhs")]
-transform = Transform3D(2.55295, 0, 0, 0, 2.55295, 0, 0, 0, 2.55295, 0.905585, 0.0485526, -4.81391)
-
-[node name="wb" parent="." instance=ExtResource("6_1e4o5")]
-transform = Transform3D(1.59077, 0, 0, 0, 1.59077, 0, 0, 0, 1.59077, 2.35158, 0.0154094, -6.38838)
-
-[node name="workbench" parent="." instance=ExtResource("7_qvyw6")]
-transform = Transform3D(0.631694, 0, 0, 0, 0.631694, 0, 0, 0, 0.631694, -1.48358, -0.0594094, -4.25746)
-
-[node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
-transform = Transform3D(0.425224, 0, 0, 0, 0.425224, 0, 0, 0, 0.425224, -1.02714, 0.453121, -5.7859)
-
-[node name="vise" parent="." instance=ExtResource("9_f7775")]
-transform = Transform3D(0.0619034, 0, 0, 0, 0.0619034, 0, 0, 0, 0.0619034, 2.2173, 0.493294, -6.78419)
-
-[node name="workbench2" parent="." instance=ExtResource("10_wd261")]
-transform = Transform3D(0.652565, 0, 0, 0, 0.652565, 0, 0, 0, 0.652565, 2.96134, 0.493294, -7.39151)
-
-[node name="modular_sewer_pipes" parent="." instance=ExtResource("11_v2hx8")]
-transform = Transform3D(0.448614, 0, 0, 0, 0.0240963, 0.447966, 0, -0.447966, 0.0240963, 0.934085, 1.35759, -8.52268)
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.65359, 0, 0, 0, 3.65359, 0, 0, 0, 3.65359, 0.551695, 0.421944, -13.9341)
-material_override = ExtResource("12_1ia3i")
-mesh = SubResource("PlaneMesh_ch48n")
+transform = Transform3D(-5.65289, -1.99978, 0, 5.06422, -2.23224, 0, 0, 0, 13.8889, 8.91203, 6.49193, 4.88653)
+material_override = SubResource("StandardMaterial3D_pydnp")
+mesh = SubResource("PlaneMesh_geb3c")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.65359, 0, 0, 0, 3.65359, 0, 0, 0, 3.65359, 9.25637, 0.421944, -13.9341)
-material_override = ExtResource("13_tq4oc")
-mesh = SubResource("PlaneMesh_ch48n")
+transform = Transform3D(-5.10012, 1.26219, 0, -4.85763, -1.3252, 0, 0, 0, 13.8889, -1.52582, 6.49193, 4.88653)
+material_override = SubResource("StandardMaterial3D_pydnp")
+mesh = SubResource("PlaneMesh_geb3c")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.65359, 0, 0, 0, 3.65359, 0, 0, 0, 3.65359, 9.25637, 0.421944, -4.36739)
-material_override = ExtResource("14_cw2ge")
-mesh = SubResource("PlaneMesh_ch48n")
+[node name="stuhl" parent="." instance=ExtResource("3_j8rl1")]
+transform = Transform3D(0.0601782, 0.00013982, -1.96342e-05, -0.000139789, 0.0601782, 9.30798e-05, 1.98496e-05, -9.30338e-05, 0.0601782, 2.40826, -0.0185786, 2.16917)
+
+[node name="chest" parent="." instance=ExtResource("4_ryjdu")]
+transform = Transform3D(0.685606, 0, 0, 0, 0.685606, 0, 0, 0, 0.685606, 1.66992, 0.00527143, 9.63405)
+
+[node name="a_wooden_crate" parent="." instance=ExtResource("5_l2yhs")]
+transform = Transform3D(2.55295, 0, 0, 0, 2.55295, 0, 0, 0, 2.55295, 1.5804, 0.0485526, 8.41772)
+
+[node name="wb" parent="." instance=ExtResource("6_1e4o5")]
+transform = Transform3D(1.59077, 0, 0, 0, 1.59077, 0, 0, 0, 1.59077, 0.711998, 0.0154094, 4.646)
+
+[node name="workbench" parent="." instance=ExtResource("7_qvyw6")]
+transform = Transform3D(0.631694, 0, 0, 0, 0.631694, 0, 0, 0, 0.631694, 7.90947, -0.0594094, 7.4319)
+
+[node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
+transform = Transform3D(0.425224, 0, 0, 0, 0.425224, 0, 0, 0, 0.425224, 3.32348, 0.453121, 3.5234)
+
+[node name="vise" parent="." instance=ExtResource("9_f7775")]
+transform = Transform3D(0.0619034, 0, 0, 0, 0.0619034, 0, 0, 0, 0.0619034, 2.01445, 0.493294, 8.81635)
+
+[node name="workbench2" parent="." instance=ExtResource("10_wd261")]
+transform = Transform3D(0.652565, 0, 0, 0, 0.652565, 0, 0, 0, 0.652565, 4.42466, 0.493294, 5.65312)
+
+[node name="modular_sewer_pipes" parent="." instance=ExtResource("11_v2hx8")]
+transform = Transform3D(-1.96095e-08, -0.448614, -1.96095e-08, 0, -1.96095e-08, 0.448614, -0.448614, 1.96095e-08, 8.57159e-16, -1.52045, 1.35759, 5.59537)
 
 [node name="wooden_boxes" parent="." instance=ExtResource("15_8y134")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.24184, 0, 1.21127)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42003, -1.19209e-07, 4.51707)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_n5mk5")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.227745, 1.21108, -8.97814)
-material_override = ExtResource("12_1ia3i")
-size = Vector3(21.698, 5.86431, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.87009, 2.06895, 2.11383)
-material_override = ExtResource("12_1ia3i")
-size = Vector3(21.698, 5.56497, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.24408, 4.19284, -3.33789)
@@ -98,10 +85,13 @@ shadow_blur = 2.217
 omni_range = 5.83397
 
 [node name="lamp" parent="." instance=ExtResource("19_83bff")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61847, 6.08022, 1.39557)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95359, 3.83768, 6.89067)
+
+[node name="lamp2" parent="." instance=ExtResource("19_83bff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44641, 3.66134, 4.08053)
 
 [node name="Anchor" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25498, 0, 4.08053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20206, 0, 4.08053)
 
 [node name="OrbitCamera" type="Camera3D" parent="Anchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65081, 4.38897)
@@ -173,5 +163,52 @@ offset_top = 201.0
 offset_right = 76.0
 offset_bottom = 232.0
 text = "ITEM"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.89889, 4.6177, 0.751685)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.89889, 4.6177, -3.75048)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.89889, 4.6177, 4.10365)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.89889, 4.6177, 6.90475)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.88742, 4.67506, 9.30615)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3.88742, 4.67506, 12.2587)
+material_override = ExtResource("14_cw2ge")
+size = Vector3(0.942536, 13.1703, 0.382733)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.2705, 2.06895, 6.72418)
+material_override = ExtResource("13_tq4oc")
+size = Vector3(14.2366, 5.56497, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2189, 2.15587, 6.63695)
+material_override = ExtResource("12_1ia3i")
+size = Vector3(15.6966, 5.56497, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.227745, 1.21108, -0.41511)
+material_override = ExtResource("12_1ia3i")
+size = Vector3(21.698, 16.0812, 1)
 
 [connection signal="button_down" from="CanvasLayer/ColorRect/MoveButton" to="." method="_move_btn_click"]
