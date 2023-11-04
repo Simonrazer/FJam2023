@@ -327,3 +327,4 @@ func _item_btn_click():
 
 func _end_round_btn_click():
 	change_state(ChangeTrigger.EndRound, Vector2())
+
