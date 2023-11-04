@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=23 format=3 uid="uid://bomgaa4681vs6"]
+
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]

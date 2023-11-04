@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://duivs54uwapsx"]
+
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_if04m"]
+
+[node name="test_contrl" type="Node3D"]
+script = ExtResource("1_if04m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.67878, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 233.0
+offset_top = 139.0
+offset_right = 288.0
+offset_bottom = 170.0
+text = "MOVE"
+
+[connection signal="button_down" from="CanvasLayer/Button" to="." method="_move_btn_click"]

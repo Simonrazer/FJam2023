@@ -1,10 +1,14 @@
-extends Node3D
+class_name GameController extends Node3D
 
 @onready var file = 'res://Maps/map1.txt'
 
-var tile_width = 10
-var tile_height = 10
 var tile_scene
+var TileMatrix=[] # oben (0,0) nach unten (1, 0) nach rechts (0,1)
+var Map_Width: int
+var Map_Height: int
+
+var list_of_players: Array[CharacterBase]
+var list_of_enemies: Array[CharacterBase]
 
 func _ready():
 	tile_scene = preload("res://Prefabs/tile.tscn")
@@ -17,18 +21,17 @@ func load_file(file):
 	var height = 0
 	
 	var lines = content.split('\n')
-	var Map_Width = lines[0].length()
-	var Map_height = content.count("\n")
+	Map_Width = lines[0].length()
+	Map_Height = content.count("\n")
 	
-	var TileMatrix=[]
 	for x in range(Map_Width):
 		TileMatrix.append([])
 		#glaube das braucht man nicht aber you never know
-		for y in range(Map_height):
-			TileMatrix[x].append(0)
+		for y in range(Map_Height):
+			TileMatrix[x].append(null)
 	for ch in content:
 		# eigene Charactere:
-		#T = Tile
+		## = Tile
 		#B = Brute
 		#H = Bloohound
 		#M = Mage
@@ -53,6 +56,11 @@ func load_file(file):
 			'B':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				var brute: CharacterBase
+				brute = TheBrute.new()
+				brute.initChild()
+				brute.init_character(Vector2(width, height))
+				list_of_players.append(brute)
 				width += 1;
 			'H':
 				ColStr += "f"
@@ -99,11 +107,11 @@ func load_file(file):
 
 #addsTile. width and height are integers. The conversion into world space is 
 func addTile(width,height,type):
-	print("uzgzu")
 	var tile = tile_scene.instantiate()
 	#set color base on checkerboard pattern
 	tile.position = Vector3(width, 0, height)
 	tile.set_color(type)
+	tile.set_game_controller(self)
 	add_child(tile)
 	return tile;
 
@@ -135,73 +143,117 @@ enum ChangeTrigger {
 	EndRound,
 }
 
-@export var current_state: GameControlStates = GameControlStates.Start
+@export var current_state: GameControlStates = GameControlStates.PlayerRound
 @export var current_selected_character: CharacterBase = null
 
+var all_colored_tiles: Array[Tile]
+
+#utility functions
+func color_range(action_length: int, center: Vector2):
+	for i in range(-action_length, action_length + 1):
+		for j in range(-action_length, action_length + 1):
+			var tile_pos: Vector2 = Vector2(center.x + i, center.y + j)
+			
+			if i == 0 and j == 0: continue
+			if tile_pos.x < 0 or tile_pos.y < 0: continue
+			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
+			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
+			
+			TileMatrix[tile_pos.x][tile_pos.y].highlight()
+			all_colored_tiles.append(TileMatrix[tile_pos.y][tile_pos.x])
+
+func clear_all_colored_tiles():
+	for tile in all_colored_tiles:
+		tile.reset_color()
+	all_colored_tiles.clear()
+	print(len(all_colored_tiles))
+
+func check_for_any_moves():
+	for player in list_of_players:
+		if player.has_actions(): return true
+
+#state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
+	print("Old State: ", GameControlStates.keys()[current_state])
+	print("Change Trigger: ", ChangeTrigger.keys()[change])
 	match current_state:
 		GameControlStates.PlayerRound:
 			change_state_from_PlayerRound(change, tile)
 		GameControlStates.PlayerSelected:
 			change_state_from_PlayerSelected(change, tile)
 		GameControlStates.PlayerMoving:
-			pass
+			change_state_from_PlayerMoving(change, tile)
 		GameControlStates.PlayerHealing:
 			pass
 		GameControlStates.PlayerDamaging:
 			pass
-			
+	
+	print("New State: ", GameControlStates.keys()[current_state])
+	print("")
 
 func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
-			#if tile == player and player.has_moves():
-			#	current_state = GameControlStates.PlayerSelected
-			#	
-			#	color tile clicked
-			#	current_selected_character = player from list at tile pos
-			#	var moves_available: Array[bool] = current_selected_character.getMoves()
+			for player in list_of_players:
+				if player.get_pos() != tile: continue
+				if player.has_actions():
+					current_state = GameControlStates.PlayerSelected
+					current_selected_character = player
+					
+					TileMatrix[tile.x][tile.y].highlight()
+					all_colored_tiles.append(TileMatrix[tile.x][tile.y])
+					
+					var moves_available: Array[bool] = current_selected_character.get_actions()
+					break
+
 			#	moveButton.setActive(moves_available[0])
 			#	healButton.setActive(moves_available[1])
 			#	stealButton.setActive(moves_available[1])
 			#	damageButton.setActive(moves_available[1])
 			#	classButton.setActive(moves_available[1])
-			pass 
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit
+			clear_all_colored_tiles()
 
 func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
 			current_state = GameControlStates.PlayerRound
-			# revert color change of player tile
+			clear_all_colored_tiles()
 			current_selected_character = null
 		ChangeTrigger.Move:
+			if not current_selected_character.get_actions()[0]: return
 			current_state = GameControlStates.PlayerMoving
-			var move_length: int = current_selected_character.get_movement_stat()
-			for i in range(-move_length, move_length):
-				for j in range(-move_length, move_length):
-					# color stuff, maybe save what has been colored? then one method to uncolor everything
-					pass
+			color_range(current_selected_character.get_movement_stat(), current_selected_character.get_pos())
 		ChangeTrigger.Heal:
 			current_state = GameControlStates.PlayerHealing
-			var move_length: int = current_selected_character.get_action_range(CharacterBase.Action.Heal)
-			for i in range(-move_length, move_length):
-				for j in range(-move_length, move_length):
-					# color stuff, maybe save what has been colored? then one method to uncolor everything
-					# this is also used for steal and damage, give its own method?
-					pass
+			color_range(current_selected_character.get_action_range(CharacterBase.Action.Heal), current_selected_character.get_pos())
 		ChangeTrigger.Steal:
 			current_state = GameControlStates.PlayerDamaging
+			color_range(current_selected_character.get_action_range(CharacterBase.Action.Steal), current_selected_character.get_pos())
 		ChangeTrigger.Damage:
 			current_state = GameControlStates.PlayerDamaging
+			color_range(current_selected_character.get_action_range(CharacterBase.Action.Damage), current_selected_character.get_pos())
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit
+			clear_all_colored_tiles()
 
 func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
 			if current_selected_character.move(tile):
-				pass
+				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
+				else: current_state = GameControlStates.EnemyInit
+				clear_all_colored_tiles()
+		ChangeTrigger.Move:
+			current_state = GameControlStates.PlayerSelected
+			clear_all_colored_tiles()
+			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
+			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
 			
+		ChangeTrigger.EndRound:
+			current_state = GameControlStates.EnemyInit
+			clear_all_colored_tiles()
 
+func _move_btn_click():
+	change_state(ChangeTrigger.Move, Vector2())

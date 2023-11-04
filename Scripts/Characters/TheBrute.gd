@@ -1,4 +1,4 @@
-extends CharacterBase
+class_name TheBrute extends CharacterBase
 
 #exports necesarry?
 @export_category("Brute Base Stats")
@@ -13,8 +13,8 @@ extends CharacterBase
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	character_class = Character_Class.Brute
+func initChild():
+	character_class  = Character_Class.Brute
 	is_playable = true
 	
 	base_health = brute_base_health
