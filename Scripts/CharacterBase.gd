@@ -76,14 +76,13 @@ func move(new_pos: Vector2):
 func do_action(target_pos: Vector2, action: Action):
 	var return_value: bool
 	
-	if action == Action.Damage:
-		return_value = attack_ability(target_pos, damage, false)
-	
-	if action == Action.Steal:
-		return_value = attack_ability(target_pos, steal, true)
-	
-	if action == Action.Heal:
-		return_value = heal_ability(target_pos)
+	match Action:
+		Action.Damage:
+			return_value = attack_ability(target_pos, damage, false)
+		Action.Steal:
+			return_value = attack_ability(target_pos, steal, true)
+		Action.Heal:
+			return_value = heal_ability(target_pos)
 	
 	if return_value == false:
 		return false
@@ -94,7 +93,7 @@ func do_action(target_pos: Vector2, action: Action):
 func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool):
 	var diff_vector = Vector2(enemy_pos.x - position_on_map.x, enemy_pos.y - position_on_map.y)
 	
-	if abs(diff_vector.x) > damage_range or abs(diff_vector.y) > damage_range:
+	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range:
 		return false #ERROR
 
 	#TODO check if enemy else return false
@@ -113,7 +112,7 @@ func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool):
 func heal_ability(ally_pos: Vector2):
 	var diff_vector = Vector2(ally_pos.x - position_on_map.x, ally_pos.y - position_on_map.y)
 	
-	if abs(diff_vector.x) > heal_range or abs(diff_vector.y) > heal_range:
+	if abs(diff_vector.x * diff_vector.x + diff_vector.y * diff_vector.y) > damage_range*damage_range:
 		return false #ERROR
 	
 	#TODO check if ally else return false

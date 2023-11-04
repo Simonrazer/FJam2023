@@ -7,11 +7,10 @@ class_name Minion extends CharacterBase
 @export var minion_base_movement: int = 1
 @export var minion_base_damage: Vector2 = Vector2(-3, 0)
 #TODO THIS IS SUPPOSED TO BE RANGE I DONT KNOW HOW TO HANDLE PLS HELP
-@export var minion_base_steal: Vector2 = Vector2(4, 0)
+@export var minion_base_steal: Vector2 = Vector2(0, 0)
 @export var minion_base_heal: Vector2 = Vector2(0, 0)
-@export var minion_base_damage_range: int = 1
+@export var minion_base_damage_range: int = 2
 @export var minion_base_heal_range: int = 1
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
