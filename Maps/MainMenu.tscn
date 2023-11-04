@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq7njxovkv2lu"]
+
+[ext_resource type="Texture2D" uid="uid://c4pflmge46k5b" path="res://Backgrounds/BloodWars_Menu.jpg" id="1_26okc"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_fcme1"]
+[ext_resource type="Texture2D" uid="uid://10i3ykti7ppm" path="res://Backgrounds/BloodWars_Titel.jpg" id="3_mwmom"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56vm4"]
+bg_color = Color(0.596078, 0.635294, 0.145098, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j236l"]
+bg_color = Color(0.745098, 0.160784, 0.235294, 0.2)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_fcme1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_26okc")
+expand_mode = 5
+
+[node name="BtnStart" type="Button" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082
+anchor_top = 0.705998
+anchor_right = 0.233993
+anchor_bottom = 0.804
+offset_left = -0.464005
+offset_top = -0.0400085
+offset_right = 0.440002
+offset_bottom = 0.105591
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_56vm4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j236l")
+metadata/_edit_use_anchors_ = true
+
+[node name="BtnLoad" type="Button" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.316375
+anchor_top = 0.70706
+anchor_right = 0.468368
+anchor_bottom = 0.805062
+offset_left = -0.464005
+offset_top = -0.0400085
+offset_right = 0.440002
+offset_bottom = 0.105591
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_56vm4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j236l")
+metadata/_edit_use_anchors_ = true
+
+[node name="BtnSettings" type="Button" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55075
+anchor_top = 0.709979
+anchor_right = 0.747882
+anchor_bottom = 0.807981
+offset_left = -0.464005
+offset_top = -0.0400085
+offset_right = 0.440002
+offset_bottom = 0.105591
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_56vm4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j236l")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_mwmom")
+expand_mode = 5
+
+[connection signal="button_up" from="CanvasLayer/TextureRect/BtnStart" to="." method="_on_btn_start_button_up"]

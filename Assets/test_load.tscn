@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ch55krcnsm200"]
+[gd_scene load_steps=25 format=3 uid="uid://ch55krcnsm200"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cdjpuov2md3i3" path="res://Prefabs/CameraOrbito.tscn" id="20_innbc"]
 [ext_resource type="PackedScene" uid="uid://cumkk04g8f0ub" path="res://Assets/woddenBoxes/1box.tscn" id="20_sg008"]
 [ext_resource type="PackedScene" uid="uid://dl4rqywxen3r6" path="res://Assets/woddenBoxes/2box.tscn" id="21_1rvpg"]
+[ext_resource type="PackedScene" uid="uid://om400qi6kih4" path="res://Prefabs/UI.tscn" id="22_sxdvu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 
@@ -113,68 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95359, 3.83768, 6.89067)
 [node name="lamp2" parent="." instance=ExtResource("19_83bff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44641, 3.66134, 4.08053)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 1.001
-anchor_right = 1.001
-offset_left = -253.152
-offset_top = 1.0
-offset_right = -0.1521
-offset_bottom = 272.0
-color = Color(0.215686, 0.215686, 0.215686, 0.337255)
-
-[node name="MoveButton" type="Button" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 10.0
-offset_right = 74.0
-offset_bottom = 41.0
-text = "Move"
-
-[node name="AttackButton" type="Button" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 50.0
-offset_right = 76.0
-offset_bottom = 81.0
-text = "Attack"
-
-[node name="StealButton" type="Button" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 83.0
-offset_right = 76.0
-offset_bottom = 114.0
-text = "Steal"
-
-[node name="HealButton" type="Button" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 122.0
-offset_right = 78.0
-offset_bottom = 153.0
-text = "Heal"
-
-[node name="ClassButton" type="Button" parent="CanvasLayer/ColorRect"]
-visible = false
-layout_mode = 0
-offset_left = 29.0
-offset_top = 159.0
-offset_right = 80.0
-offset_bottom = 190.0
-text = "Class
-"
-
-[node name="<ITEM>" type="Button" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 201.0
-offset_right = 76.0
-offset_bottom = 232.0
-text = "ITEM"
-
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Node3D"]
@@ -246,9 +185,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64903, 0, 0.494912)
 [node name="wooden_boxes8" parent="." instance=ExtResource("21_1rvpg")]
 transform = Transform3D(0.956637, 0.260702, -0.129924, -0.00178311, 0.451273, 0.892384, 0.291278, -0.853456, 0.43217, 8.61922, 0.423561, 9.80815)
 
-[connection signal="button_down" from="CanvasLayer/ColorRect/MoveButton" to="." method="_move_btn_click"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/AttackButton" to="." method="_attack_btn_click"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/StealButton" to="." method="_steal_btn_click"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/HealButton" to="." method="_heal_btn_click"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/ClassButton" to="." method="_class_btn_click"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/<ITEM>" to="." method="_item_btn_click"]
+[node name="UI" parent="." instance=ExtResource("22_sxdvu")]
