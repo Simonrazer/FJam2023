@@ -173,6 +173,8 @@ enum ChangeTrigger {
 	Heal,
 	Steal,
 	Damage,
+	ClassAbility,
+	ItemUse,
 	EndRound,
 }
 
@@ -293,3 +295,21 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 
 func _move_btn_click():
 	change_state(ChangeTrigger.Move, Vector2())
+
+func _attack_btn_click():
+	change_state(ChangeTrigger.Damage, Vector2())
+
+func _steal_btn_click():
+	change_state(ChangeTrigger.Steal, Vector2())
+
+func _heal_btn_click():
+	change_state(ChangeTrigger.Heal, Vector2())
+
+func _class_btn_click():
+	change_state(ChangeTrigger.ClassAbility, Vector2())
+
+func _item_btn_click():
+	change_state(ChangeTrigger.ItemUse, Vector2())
+
+func _end_round_btn_click():
+	change_state(ChangeTrigger.EndRound, Vector2())
