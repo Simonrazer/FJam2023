@@ -1,4 +1,4 @@
-extends Node3D
+class_name Tile extends Node3D
 var be : Material = preload("res://Prefabs/be.tres")
 var we : Material = preload("res://Prefabs/we.tres")
 var bf : Material = preload("res://Prefabs/bf.tres")

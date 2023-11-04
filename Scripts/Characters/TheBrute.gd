@@ -1,4 +1,4 @@
-extends CharacterBase
+class_name TheBrute extends CharacterBase
 
 #exports necesarry?
 @export_category("Brute Base Stats")
