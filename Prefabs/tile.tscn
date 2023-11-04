@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6jdb7kfe7alg"]
+[gd_scene load_steps=7 format=3 uid="uid://b6jdb7kfe7alg"]
 
 [ext_resource type="Script" path="res://Scripts/TileScript.gd" id="1_srvfr"]
-[ext_resource type="Material" path="res://Prefabs/we.tres" id="2_q27te"]
+[ext_resource type="Material" uid="uid://dv0o2qk5ib2pe" path="res://Prefabs/we.tres" id="2_q27te"]
+[ext_resource type="PackedScene" uid="uid://bryp1hyg5sf8q" path="res://Prefabs/kasten.glb" id="3_j35vy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_imhip"]
 
@@ -18,6 +19,7 @@ script = ExtResource("1_srvfr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, -0.157956, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 material_override = ExtResource("2_q27te")
 mesh = SubResource("BoxMesh_imhip")
 skeleton = NodePath("../..")
@@ -25,5 +27,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ihtg1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_y5iou")
+
+[node name="kasten" parent="." instance=ExtResource("3_j35vy")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
 
 [connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

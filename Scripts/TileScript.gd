@@ -1,7 +1,6 @@
 class_name Tile extends Node3D
-var be : Material = preload("res://Prefabs/be.tres")
+
 var we : Material = preload("res://Prefabs/we.tres")
-var bf : Material = preload("res://Prefabs/bf.tres")
 var wf : Material = preload("res://Prefabs/wf.tres")
 var b_ : Material = preload("res://Prefabs/b_.tres")
 var w_ : Material = preload("res://Prefabs/w_.tres")
@@ -29,18 +28,18 @@ func set_color(type: String):
 	color = type
 	if type[0] == "w":
 		if type[1] == "e":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(we)
+			get_node("kasten/Cube").set_material_override(we)
 		elif type[1] == "f":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(wf)
+			get_node("kasten/Cube").set_material_override(wf)
 		elif type[1] == "_":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(w_)
+			get_node("kasten/Cube").set_material_override(w_)
 	elif type[0] == "b":
 		if type[1] == "e":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(be)
+			get_node("kasten/Cube").set_material_override(we)
 		elif type[1] == "f":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(bf)
+			get_node("kasten/Cube").set_material_override(wf)
 		elif type[1] == "_":
-			get_node("StaticBody3D/MeshInstance3D").set_material_override(b_)
+			get_node("kasten/Cube").set_material_override(b_)
 
 func change_color(type: String):
 	color[1] = type[0]
@@ -50,7 +49,7 @@ func reset_color():
 	set_color(color)
 
 func highlight():
-	get_node("StaticBody3D/MeshInstance3D").set_material_override(blu)
+	get_node("kasten/Cube").set_material_override(blu)
 
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	if Input.is_action_just_pressed("click"):
