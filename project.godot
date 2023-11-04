@@ -15,6 +15,10 @@ run/main_scene="res://Assets/test_load.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/orbit_camera/plugin.cfg")
+
 [input]
 
 click={

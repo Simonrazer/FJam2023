@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://djwu8pineh8tn"]
+
+[ext_resource type="Texture2D" uid="uid://db0423br2cci2" path="res://Charas/Tank.png" id="1_uh050"]
+[ext_resource type="Script" path="res://Charas/CharaMove.gd" id="2_4qjpo"]
+[ext_resource type="Texture2D" uid="uid://du3cqr1o41irc" path="res://Charas/cccircular.svg" id="3_1ap75"]
+
+[node name="Tank" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0.734476, 0)
+transparent = false
+texture = ExtResource("1_uh050")
+script = ExtResource("2_4qjpo")
+updown_amp = 0.07
+updownH_freq = 3
+updownH_amp = 1.01
+
+[node name="Holo" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(5.38712, 0, 0, 0, -0.0696693, 5.38667, 0, -5.38667, -0.0696693, 0, -4.4429, 0)
+modulate = Color(0.443137, 0.329412, 0.462745, 1)
+texture = ExtResource("3_1ap75")
+
+[node name="Holo2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(4.40547, 0, 0, 0, -0.108788, 4.40412, 0, -4.40412, -0.108788, 0, -3.82173, 0)
+modulate = Color(0.945098, 0.254902, 0.415686, 1)
+texture = ExtResource("3_1ap75")

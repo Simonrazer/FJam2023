@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b030i8h8sh3j5"]
+
+[ext_resource type="PackedScene" uid="uid://b3gxmn25o2gci" path="res://Assets/metallamp/lamp.glb" id="1_t4yvy"]
+
+[node name="lamp" type="Node3D"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 16.0
+light_volumetric_fog_energy = 1.089
+light_specular = 1.033
+shadow_enabled = true
+spot_range = 17.893
+spot_angle = 47.1093
+
+[node name="lamp" parent="." instance=ExtResource("1_t4yvy")]
+transform = Transform3D(0.102188, 0, 0, 0, 0.102188, 0, 0, 0, 0.102188, 0, 0, 0)
