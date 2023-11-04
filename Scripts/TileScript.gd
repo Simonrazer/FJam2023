@@ -42,6 +42,10 @@ func set_color(type: String):
 		elif type[1] == "_":
 			get_node("StaticBody3D/MeshInstance3D").set_material_override(b_)
 
+func change_color(type: String):
+	color[1] = type[0]
+	set_color(color)
+
 func reset_color():
 	set_color(color)
 

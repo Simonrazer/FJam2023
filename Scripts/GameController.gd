@@ -171,6 +171,7 @@ enum GameControlStates {
 	PlayerMoving,
 	PlayerHealing,
 	PlayerDamaging,
+	PlayerStealing,
 	
 	EnemyRound,
 	EnemyInit,
@@ -202,6 +203,7 @@ func color_range(action_length: int, center: Vector2):
 			if tile_pos.x < 0 or tile_pos.y < 0: continue
 			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
+			if (i*i + j*j) > action_length*action_length: continue
 			
 			TileMatrix[tile_pos.x][tile_pos.y].highlight()
 			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y ])
@@ -216,6 +218,11 @@ func check_for_any_moves():
 	for player in list_of_players:
 		if player.has_actions(): return true
 
+func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
+	for entity in list:
+		if entity.get_pos() == pos: return entity
+	
+	return null
 #state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
 	print("Old State: ", GameControlStates.keys()[current_state])
@@ -230,18 +237,14 @@ func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
 		GameControlStates.PlayerHealing:
 			change_state_from_PlayerHealing(change, tile)
 		GameControlStates.PlayerDamaging:
-			pass
+			change_state_from_PlayerDamaging(change, tile)
+		GameControlStates.PlayerStealing:
+			change_state_from_PlayerStealing(change, tile)
 	
 	print("New State: ", GameControlStates.keys()[current_state])
 	print("")
 
-func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
-	match change:
-		ChangeTrigger.Heal:
-			pass
-		ChangeTrigger.Tile:
-			pass
-
+#ALL STATE CHANGED FROM FUNCTIONS
 func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
@@ -261,6 +264,7 @@ func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 					buttons[3].disabled = !moves_available[1]
 					buttons[4].disabled = !moves_available[2]
 					buttons[5].disabled = !moves_available[2] #should be 3 -> CHANGE
+					
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit
 			clear_all_colored_tiles()
@@ -279,7 +283,7 @@ func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 			current_state = GameControlStates.PlayerHealing
 			color_range(current_selected_character.get_action_range(CharacterBase.Action.Heal), current_selected_character.get_pos())
 		ChangeTrigger.Steal:
-			current_state = GameControlStates.PlayerDamaging
+			current_state = GameControlStates.PlayerStealing
 			color_range(current_selected_character.get_action_range(CharacterBase.Action.Steal), current_selected_character.get_pos())
 		ChangeTrigger.Damage:
 			current_state = GameControlStates.PlayerDamaging
@@ -291,11 +295,16 @@ func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 	match change:
 		ChangeTrigger.Tile:
+			var original_pos: Vector2 = current_selected_character.get_pos()
+			var get_possible_enemy: CharacterBase = get_entity_at_pos(tile, list_of_enemies)
+			var get_possible_player: CharacterBase = get_entity_at_pos(tile, list_of_players)
+			if get_possible_enemy != null or get_possible_player != null: return
+			
 			if current_selected_character.move(tile):
-				
-				#current_selected_character.model.position = Vector3(current_selected_character.get_pos().x, 0, current_selected_character.get_pos().y)
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
 				else: current_state = GameControlStates.EnemyInit
+				TileMatrix[tile.x][tile.y].change_color("f")
+				TileMatrix[original_pos.x][original_pos.y].change_color("_")
 				clear_all_colored_tiles()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
@@ -307,6 +316,51 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 			current_state = GameControlStates.EnemyInit
 			clear_all_colored_tiles()
 
+func change_state_from_PlayerHealing(change: ChangeTrigger,  tile: Vector2):
+	match change:
+		ChangeTrigger.Heal:
+			current_state = GameControlStates.PlayerSelected
+			clear_all_colored_tiles()
+			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
+			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
+		ChangeTrigger.Tile:
+			var entity: CharacterBase = get_entity_at_pos(tile, list_of_players)
+			if current_selected_character.do_action(tile, CharacterBase.Action.Heal, entity):
+				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
+				else: current_state = GameControlStates.EnemyInit
+				clear_all_colored_tiles()
+
+func change_state_from_PlayerDamaging(change: ChangeTrigger, tile: Vector2):
+	match change:
+		ChangeTrigger.Damage:
+			current_state = GameControlStates.PlayerSelected
+			clear_all_colored_tiles()
+			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
+			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
+		ChangeTrigger.Tile:
+			var entity: CharacterBase = get_entity_at_pos(tile, list_of_enemies)
+			if current_selected_character.do_action(tile, CharacterBase.Action.Damage, entity):
+				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
+				else: current_state = GameControlStates.EnemyInit
+				clear_all_colored_tiles()
+				
+func change_state_from_PlayerStealing(change: ChangeTrigger, tile: Vector2):
+	match change:
+		ChangeTrigger.Steal:
+			current_state = GameControlStates.PlayerSelected
+			clear_all_colored_tiles()
+			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
+			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
+		ChangeTrigger.Tile:
+			var entity: CharacterBase = get_entity_at_pos(tile, list_of_enemies)
+			print("enemy before: ", entity.armor, " ", entity.health)
+			if current_selected_character.do_action(tile, CharacterBase.Action.Steal, entity):
+				print("enemy after: ", entity.armor, " ", entity.health)
+				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
+				else: current_state = GameControlStates.EnemyInit
+				clear_all_colored_tiles()
+
+#ALL BUTTON FUNCTIONS
 func _move_btn_click():
 	change_state(ChangeTrigger.Move, Vector2())
 
