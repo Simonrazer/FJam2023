@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdjpuov2md3i3"]
+
+[ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="1_opsbc"]
+
+[node name="CameraOrbito" type="Node3D"]
+
+[node name="Anchor" type="Node3D" parent="."]
+
+[node name="OrbitCamera" type="Camera3D" parent="Anchor"]
+transform = Transform3D(1, 0, 0, 0, 0.918805, 0.394712, 0, -0.394712, 0.918805, 0, 1.65081, 4.38897)
+script = ExtResource("1_opsbc")
+SCROLL_SPEED = 4.46
+ZOOM_SPEED = 3.86
+DEFAULT_DISTANCE = 4.94
+ROTATE_SPEED = 0.545
+ANCHOR_NODE_PATH = NodePath("..")

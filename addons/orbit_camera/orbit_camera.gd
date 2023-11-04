@@ -39,10 +39,10 @@ func _process_transformation(delta: float):
 	# Update rotation
 	#_rotation.x += -_move_speed.y * delta * ROTATE_SPEED
 	_rotation.y += -_move_speed.x * delta * ROTATE_SPEED
-	if _rotation.x < -PI/2:
-		_rotation.x = -PI/2
-	if _rotation.x > PI/2:
-		_rotation.x = PI/2
+	if _rotation.y < -PI/2 +0.2:
+		_rotation.y = -PI/2+0.2
+	if _rotation.y > PI/2-0.2:
+		_rotation.y = PI/2-0.2
 	_move_speed = Vector2()
 	
 	# Update distance

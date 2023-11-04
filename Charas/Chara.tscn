@@ -10,7 +10,6 @@
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0.734476, 0)
-billboard = 2
 transparent = false
 texture = ExtResource("1_uh050")
 script = ExtResource("2_4qjpo")
@@ -20,7 +19,7 @@ updownH_amp = 1.01
 
 [node name="Holo" type="Sprite3D" parent="Sprite3D"]
 transform = Transform3D(5.38712, 0, 0, 0, -0.0696693, 5.38667, 0, -5.38667, -0.0696693, 0, -4.4429, 0)
-modulate = Color(0.443137, 0.329412, 0.462745, 1)
+modulate = Color(0.77239, 0.667163, 0.790032, 1)
 texture = ExtResource("3_1ap75")
 
 [node name="Holo2" type="Sprite3D" parent="Sprite3D"]
