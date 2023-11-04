@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://bomgaa4681vs6"]
+[gd_scene load_steps=5 format=3 uid="uid://ch55krcnsm200"]
 
-[ext_resource type="Script" path="res://Scripts/LoadMap.gd" id="1_0t8km"]
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Texture2D" uid="uid://cyisx7arw4jtv" path="res://Assets/bigcheck.png" id="2_v11vc"]
 [ext_resource type="PackedScene" uid="uid://cewcrup88uvhm" path="res://Assets/stuhl/stuhl.glb" id="3_j8rl1"]
 [ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="4_ryjdu"]
@@ -24,7 +24,7 @@ albedo_texture = ExtResource("2_v11vc")
 [sub_resource type="PlaneMesh" id="PlaneMesh_ch48n"]
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_0t8km")
+script = ExtResource("1_tqucb")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.303534, 0.952821, 0, -0.952821, 0.303534, -8.98212, 0, 2.63364)
