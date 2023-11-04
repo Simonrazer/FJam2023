@@ -3,13 +3,13 @@ class_name CharacterBase extends Node
 enum Character_Class {
 	#player character
 	Brute,
-	Magician,
-	Bloodhound,
+	Milo,
+	Hetzer,
 	Rock,
 	
 	#enemy character
 	Minion,
-	Solder,
+	Soldier,
 	Hound,
 	Archer,
 	GangLeader,

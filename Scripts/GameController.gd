@@ -25,7 +25,7 @@ func load_file(file):
 		TileMatrix.append([])
 		#glaube das braucht man nicht aber you never know
 		for y in range(Map_height):
-			TileMatrix[x].append(0)
+			TileMatrix[x].append(null)
 	for ch in content:
 		# eigene Charactere:
 		#T = Tile
@@ -95,6 +95,7 @@ func load_file(file):
 				width = 0
 			_:
 				width = width + 1
+				
 	return
 
 #addsTile. width and height are integers. The conversion into world space is 
