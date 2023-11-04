@@ -7,6 +7,7 @@ extends Sprite3D
 @export var updownH_amp = 0.1
 
 var sprites: Array[CompressedTexture2D]
+var sprites_size: int = 20
 
 var _startpos
 var holo
@@ -16,8 +17,9 @@ func _ready():
 	_startpos = self.position
 	holo = get_node("Holo")
 	holo2 = get_node("Holo2")
-	
+	print("kek")
 	#load all sprites
+	sprites.resize(sprites_size)
 	#friendly:
 	sprites[CharacterBase.Character_Class.Brute] = preload("res://Charas/Headshot_Brutus.png")
 	sprites[CharacterBase.Character_Class.Milo] = preload("res://Charas/Headshot_Milo.png")

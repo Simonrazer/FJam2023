@@ -21,8 +21,8 @@ func _ready():
 func instantiate_entity(pos: Vector2, is_enemy: bool, ColStr: String, type: CharacterBase.Character_Class):
 	var chara = chara_scene.instantiate()
 	chara.position = Vector3(pos.x, 0, pos.y)
-	chara.init_sprite(type)
 	add_child(chara)
+	chara.get_child(0).init_sprite(type)
 	
 	var entity: CharacterBase
 	match(type):
@@ -81,6 +81,7 @@ func load_file(file):
 			'B':
 				ColStr += "f"
 				TileMatrix[width][height] = addTile(width,height, ColStr)
+				instantiate_entity(Vector2(width, height), false, ColStr, CharacterBase.Character_Class.Brute)
 				width += 1;
 			'H':
 				ColStr += "f"
