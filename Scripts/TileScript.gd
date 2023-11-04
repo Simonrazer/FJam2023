@@ -8,7 +8,9 @@ var w_ : Material = preload("res://Prefabs/w_.tres")
 
 var blu : Material = preload("res://Prefabs/blueHigh.tres")
 
-var color : String
+var game_controller: GameController
+
+var color: String
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#rando = RandomNumberGenerator.new().randi()
@@ -18,6 +20,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func set_game_controller(gc: GameController):
+	game_controller = gc
 
 #type: w/b|e/f/_
 func set_color(type: String):
@@ -45,5 +50,5 @@ func highlight():
 
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	if Input.is_action_just_pressed("click"):
-		highlight()
+		game_controller.change_state(GameController.ChangeTrigger.Tile, Vector2(self.position.x, self.position.z))
 	pass # Replace with function body.
