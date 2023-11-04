@@ -157,16 +157,16 @@ func color_range(action_length: int, center: Vector2):
 			if i == 0 and j == 0: continue
 			if tile_pos.x < 0 or tile_pos.y < 0: continue
 			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
-			if TileMatrix[tile_pos.y][tile_pos.x] == null: continue
+			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			
-			TileMatrix[tile_pos.y][tile_pos.x].highlight()
+			TileMatrix[tile_pos.x][tile_pos.y].highlight()
 			all_colored_tiles.append(TileMatrix[tile_pos.y][tile_pos.x])
 
 func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
-		print(tile.position)
 		tile.reset_color()
 	all_colored_tiles.clear()
+	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -200,8 +200,8 @@ func change_state_from_PlayerRound(change: ChangeTrigger,  tile: Vector2):
 					current_state = GameControlStates.PlayerSelected
 					current_selected_character = player
 					
-					TileMatrix[tile.y][tile.x].highlight()
-					all_colored_tiles.append(TileMatrix[tile.y][tile.x])
+					TileMatrix[tile.x][tile.y].highlight()
+					all_colored_tiles.append(TileMatrix[tile.x][tile.y])
 					
 					var moves_available: Array[bool] = current_selected_character.get_actions()
 					break
@@ -222,9 +222,9 @@ func change_state_from_PlayerSelected(change: ChangeTrigger,  tile: Vector2):
 			clear_all_colored_tiles()
 			current_selected_character = null
 		ChangeTrigger.Move:
+			if not current_selected_character.get_actions()[0]: return
 			current_state = GameControlStates.PlayerMoving
 			color_range(current_selected_character.get_movement_stat(), current_selected_character.get_pos())
-			#color_range(1, current_selected_character.get_pos())
 		ChangeTrigger.Heal:
 			current_state = GameControlStates.PlayerHealing
 			color_range(current_selected_character.get_action_range(CharacterBase.Action.Heal), current_selected_character.get_pos())
@@ -248,8 +248,8 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
 			clear_all_colored_tiles()
-			TileMatrix[current_selected_character.get_pos().y][current_selected_character.get_pos().x].highlight()
-			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().y][current_selected_character.get_pos().x])
+			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
+			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])
 			
 		ChangeTrigger.EndRound:
 			current_state = GameControlStates.EnemyInit

@@ -158,7 +158,7 @@ func get_actions():
 	return actions
 
 func has_actions():
-	return actions[0] and actions[1] and actions[2]
+	return actions[0] or actions[1] or actions[2]
 
 func get_action_range(action: Action):
 	
