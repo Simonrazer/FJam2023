@@ -52,6 +52,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	pass
 
 func init_character(start_pos: Vector2):
@@ -70,6 +71,7 @@ func move(new_pos: Vector2):
 		return false #ERROR
 	
 	position_on_map = new_pos
+	self.model.get_node("Sprite3D").doMove(Vector3(position_on_map.x, 0, position_on_map.y))
 	#TODO implement on squares -> Game controller get new pos
 	actions[0] = false
 	return true

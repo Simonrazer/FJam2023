@@ -265,7 +265,7 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 		ChangeTrigger.Tile:
 			if current_selected_character.move(tile):
 				
-				current_selected_character.model.position = Vector3(current_selected_character.get_pos().x, 0, current_selected_character.get_pos().y)
+				#current_selected_character.model.position = Vector3(current_selected_character.get_pos().x, 0, current_selected_character.get_pos().y)
 				if check_for_any_moves(): current_state = GameControlStates.PlayerRound
 				else: current_state = GameControlStates.EnemyInit
 				clear_all_colored_tiles()

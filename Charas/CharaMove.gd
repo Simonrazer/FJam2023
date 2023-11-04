@@ -12,6 +12,11 @@ var sprites_size: int = 20
 var _startpos
 var holo
 var holo2
+
+var movin = false
+var moveTo
+var counter = 0
+var startPos
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_startpos = self.position
@@ -37,7 +42,21 @@ func _process(delta):
 	#holo.position.y = sin(_ti/updownH_freq)*updownH_amp-_startpos.y
 	holo.rotate(Vector3(0, 1, 0), 0.03)
 	holo2.rotate(Vector3(0, 1, 0), 0.035)
+	
+	if movin:
+		global_position = global_position.lerp(moveTo, delta*2)
+		counter += delta
+		if counter >= 2:
+			global_position.x = moveTo.x
+			global_position.z = moveTo.z
+			counter = 0
+			movin = false
 	pass
+
+func doMove(newPos:Vector3):
+	movin = true
+	startPos = global_position
+	moveTo = newPos
 
 func init_sprite(desired_sprite: CharacterBase.Character_Class):
 	texture = sprites[desired_sprite]

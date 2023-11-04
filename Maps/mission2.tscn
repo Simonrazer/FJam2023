@@ -4,3 +4,4 @@
 
 [node name="mission2" type="Node3D"]
 script = ExtResource("1_54yht")
+current_state = null
