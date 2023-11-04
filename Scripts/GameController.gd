@@ -181,13 +181,14 @@ func color_range(action_length: int, center: Vector2):
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			
 			TileMatrix[tile_pos.x][tile_pos.y].highlight()
-			all_colored_tiles.append(TileMatrix[tile_pos.y][tile_pos.x])
+			all_colored_tiles.append(TileMatrix[tile_pos.x][tile_pos.y])
+			
+			prints(TileMatrix[tile_pos.x][tile_pos.y])
 
 func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
 		tile.reset_color()
 	all_colored_tiles.clear()
-	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -270,6 +271,7 @@ func change_state_from_PlayerMoving(change: ChangeTrigger, tile: Vector2):
 				clear_all_colored_tiles()
 		ChangeTrigger.Move:
 			current_state = GameControlStates.PlayerSelected
+			print(len(all_colored_tiles))
 			clear_all_colored_tiles()
 			TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y].highlight()
 			all_colored_tiles.append(TileMatrix[current_selected_character.get_pos().x][current_selected_character.get_pos().y])

@@ -17,7 +17,7 @@ func _ready():
 	_startpos = self.position
 	holo = get_node("Holo")
 	holo2 = get_node("Holo2")
-	print("kek")
+
 	#load all sprites
 	sprites.resize(sprites_size)
 	#friendly:
