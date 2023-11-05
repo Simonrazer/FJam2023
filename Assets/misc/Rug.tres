@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dl8o5k75e7iua"]
+
+[ext_resource type="Texture2D" uid="uid://dpvxy8pkvd1v7" path="res://Assets/misc/Rug1.jpg" id="1_l8tpw"]
+
+[resource]
+albedo_texture = ExtResource("1_l8tpw")
+uv1_scale = Vector3(1.005, 1.005, 0.98)
+uv1_offset = Vector3(0.49, -0.255, 0.5)
+uv1_triplanar = true

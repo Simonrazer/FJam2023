@@ -1,7 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://cju1iwhgxiwui"]
+[gd_scene load_steps=14 format=3 uid="uid://cju1iwhgxiwui"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_54yht"]
+[ext_resource type="PackedScene" uid="uid://cdjpuov2md3i3" path="res://Prefabs/CameraOrbito.tscn" id="2_1ywo8"]
+[ext_resource type="Material" uid="uid://yfqdg4xxhp80" path="res://Assets/plank/plankmat.tres" id="3_s7ojh"]
+[ext_resource type="Material" uid="uid://dl8o5k75e7iua" path="res://Assets/misc/Rug.tres" id="4_2ts36"]
+[ext_resource type="Material" uid="uid://bbb7gwgqi186w" path="res://Assets/plaster/plasterMat.tres" id="5_yfjdj"]
+[ext_resource type="PackedScene" uid="uid://cumkk04g8f0ub" path="res://Assets/woddenBoxes/1box.tscn" id="6_birj7"]
+[ext_resource type="PackedScene" uid="uid://dl4rqywxen3r6" path="res://Assets/woddenBoxes/2box.tscn" id="7_a7wh8"]
+[ext_resource type="PackedScene" uid="uid://cewcrup88uvhm" path="res://Assets/stuhl/stuhl.glb" id="8_onb1m"]
+[ext_resource type="PackedScene" uid="uid://dl03osixwvbxd" path="res://Assets/schrankding/old_furniture.glb" id="9_vkr6y"]
+[ext_resource type="PackedScene" uid="uid://dr1msdak8u12k" path="res://Assets/crate1/a_wooden_crate.glb" id="10_igf7b"]
+[ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="11_e1y72"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_slays"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5xdly"]
 
 [node name="mission2" type="Node3D"]
 script = ExtResource("1_54yht")
 current_state = null
+
+[node name="CameraOrbito" parent="." instance=ExtResource("2_1ywo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11551, 0, 1.76763)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.45508, 0, 0, 0, 1, 0, 0, 0, 9.90923, 0, 0, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.44771, 0, 0, 0, 0.314675, 0, 0, 0, 5.49961, -2.12134, 0.0201597, 3.71761)
+material_override = ExtResource("4_2ts36")
+mesh = SubResource("BoxMesh_5xdly")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.5443e-06, -3.73657, 0, 35.3296, -1.63331e-07, 0, 0, 0, 37.0265, 8.92334, 9.36265, 0)
+material_override = ExtResource("5_yfjdj")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.11654e-07, 1.23799, -1.07246e-06, 11.7053, -5.41142e-08, 0, -4.47302e-14, -1.08228e-07, -12.2675, -8.47994, 9.36265, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="wooden_boxes" parent="." instance=ExtResource("6_birj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44655, -4.76837e-07, -3.24991)
+
+[node name="wooden_boxes2" parent="." instance=ExtResource("7_a7wh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.17944, -4.76837e-07, -5.80677)
+
+[node name="stuhl" parent="." instance=ExtResource("8_onb1m")]
+transform = Transform3D(0.13112, 0, 0, 0, 0.13112, 0, 0, 0, 0.13112, -4.51086, 0, 0.0943871)
+
+[node name="old_furniture" parent="." instance=ExtResource("9_vkr6y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181561, 0, 4.21542)
+
+[node name="a_wooden_crate" parent="." instance=ExtResource("10_igf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.82513, 0, 4.9182)
+
+[node name="chest" parent="." instance=ExtResource("11_e1y72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.87876, 0, 8.00603)

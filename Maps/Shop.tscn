@@ -1,13 +1,158 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmfo8pw46a6c4"]
+[gd_scene load_steps=11 format=3 uid="uid://cmfo8pw46a6c4"]
 
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="1_kou2d"]
-[ext_resource type="PackedScene" uid="uid://bujfhsayryksk" path="res://Prefabs/Item.tscn" id="1_sgi1n"]
+[ext_resource type="Texture2D" uid="uid://quc3gd417qnt" path="res://Backgrounds/Handler.png" id="3_jythq"]
+[ext_resource type="Texture2D" uid="uid://cra43h7xwai8o" path="res://Items/Armschienen_Equipment.png" id="4_edc6v"]
+[ext_resource type="Texture2D" uid="uid://dyfr38u8fxiyp" path="res://Items/Axt_Waffe.png" id="5_otadd"]
+[ext_resource type="Texture2D" uid="uid://3qqk50o38kpn" path="res://Items/Blutstein_Equipment.png" id="6_68qwk"]
+[ext_resource type="Texture2D" uid="uid://d3l4ly2r7geny" path="res://Items/Hungriges_Amulett_Artefakt.png" id="7_ou87n"]
+[ext_resource type="Texture2D" uid="uid://b0y6r1hsxr0pa" path="res://Items/Wurfmesser_Waffe.png" id="8_eoxpw"]
+[ext_resource type="Texture2D" uid="uid://b41pulwtjw6ps" path="res://Items/Medallie_Artefakt.png" id="8_p4sea"]
+[ext_resource type="Texture2D" uid="uid://dvb43ofdd1c58" path="res://Items/Phiole_Artefakt.png" id="9_yv5ff"]
+[ext_resource type="Texture2D" uid="uid://dmvroi0nuc084" path="res://Items/Stiefel_Equipment.png" id="10_8ya4c"]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_kou2d")
 
-[node name="Item" parent="." instance=ExtResource("1_sgi1n")]
-offset_left = 36.0
-offset_top = 17.0
-offset_right = 36.0
-offset_bottom = 17.32
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.00621
+anchor_bottom = 0.92284
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 1.8479
+offset_bottom = 4.0
+texture = ExtResource("3_jythq")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Item1" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.00260417
+anchor_top = 0.723765
+anchor_right = 0.0859375
+anchor_bottom = 0.861111
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_edc6v")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item2" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.0998264
+anchor_top = 0.729938
+anchor_right = 0.176215
+anchor_bottom = 0.851852
+offset_right = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_otadd")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item3" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.19184
+anchor_top = 0.723765
+anchor_right = 0.274306
+anchor_bottom = 0.864198
+offset_right = 3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_68qwk")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item4" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.299479
+anchor_top = 0.739198
+anchor_right = 0.376736
+anchor_bottom = 0.871914
+offset_right = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ou87n")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item5" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.407986
+anchor_top = 0.731481
+anchor_right = 0.483507
+anchor_bottom = 0.865741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_eoxpw")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item6" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.505208
+anchor_top = 0.742284
+anchor_right = 0.582465
+anchor_bottom = 0.871914
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_p4sea")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item7" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.609375
+anchor_top = 0.743827
+anchor_right = 0.6875
+anchor_bottom = 0.882716
+offset_bottom = -0.00012207
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_yv5ff")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Item8" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.735243
+anchor_top = 0.748457
+anchor_right = 0.813368
+anchor_bottom = 0.887346
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_8ya4c")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemDesc" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.866
+anchor_right = 0.987
+anchor_bottom = 1.0
+offset_left = 0.0879998
+offset_top = -0.16803
+offset_right = -0.0240479
+offset_bottom = 1.0
+theme_override_font_sizes/normal_font_size = 50
+
+[connection signal="gui_input" from="CanvasLayer/Item1" to="." method="_on_item_1_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item2" to="." method="_on_item_2_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item3" to="." method="_on_item_3_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item4" to="." method="_on_item_4_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item5" to="." method="_on_item_5_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item6" to="." method="_on_item_6_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item7" to="." method="_on_item_7_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Item8" to="." method="_on_item_8_gui_input"]

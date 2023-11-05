@@ -32,7 +32,7 @@ func set_color(type: String):
 		elif type[1] == "f":
 			get_node("kasten/Cube").set_material_override(wf)
 		elif type[1] == "_":
-			get_node("kasten/Cube").set_material_override(w_)
+			get_node("kasten/Cube").set_material_override(b_)
 	elif type[0] == "b":
 		if type[1] == "e":
 			get_node("kasten/Cube").set_material_override(we)
