@@ -39,8 +39,8 @@ material_override = ExtResource("5_yfjdj")
 mesh = SubResource("PlaneMesh_slays")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5443e-06, 3.73657, -3.23696e-06, 35.3296, -1.63331e-07, 0, -1.35007e-13, -3.26661e-07, -37.0265, -8.47994, 9.36265, 0)
-material_override = ExtResource("5_yfjdj")
+transform = Transform3D(5.11654e-07, 1.23799, -1.07246e-06, 11.7053, -5.41142e-08, 0, -4.47302e-14, -1.08228e-07, -12.2675, -8.47994, 9.36265, 0)
+material_override = ExtResource("3_s7ojh")
 mesh = SubResource("PlaneMesh_slays")
 
 [node name="wooden_boxes" parent="." instance=ExtResource("6_birj7")]
