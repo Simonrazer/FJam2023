@@ -50,8 +50,26 @@ func reset_color():
 
 func highlight():
 	get_node("kasten/Cube").set_material_override(blu)
+	
+func set_lists(en:Array[CharacterBase],pl:Array[CharacterBase]):
+	e = en
+	p = pl
+
+var e:Array[CharacterBase]
+var p:Array[CharacterBase]
 
 func _on_static_body_3d_input_event(camera, event, position, normal, shape_idx):
 	if Input.is_action_just_pressed("click"):
 		game_controller.change_state(GameController.ChangeTrigger.Tile, Vector2(self.position.x, self.position.z))
-	pass # Replace with function body.
+		var current_selected_character
+		for c in e:
+			if c.position_on_map.x == self.position.x and c.position_on_map.y == self.position.z:
+				current_selected_character = c
+		for c in p:
+			if c.position_on_map.x == self.position.x and c.position_on_map.y == self.position.z:
+				current_selected_character = c
+
+		if current_selected_character != null:
+			get_parent().get_node("UI/CanvasLayer/Label").text = "Health: "+str(current_selected_character.health)+"/"+str(current_selected_character.base_health)+"\nArmor: "+str(current_selected_character.armor)+"/"+str(current_selected_character.base_armor)+"\nSchaden: "+str(current_selected_character.damage)+"\nRange: "+str(current_selected_character.damage_range)
+		else:
+			print(Vector2(self.position.x, self.position.z))

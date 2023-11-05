@@ -140,5 +140,4 @@ anchor_right = 1.02517
 anchor_bottom = 1.07716
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
 metadata/_edit_use_anchors_ = true

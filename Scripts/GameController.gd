@@ -294,6 +294,8 @@ func check_for_EOG():
 
 #state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
+	if change == ChangeTrigger.Tile:
+		TileMatrix[tile.x][tile.y].set_lists(list_of_enemies,list_of_players)
 	print("Old State: ", GameControlStates.keys()[current_state])
 	print("Change Trigger: ", ChangeTrigger.keys()[change])
 	match current_state:
