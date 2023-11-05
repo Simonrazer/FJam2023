@@ -99,8 +99,9 @@ func attack_ability(enemy_pos: Vector2, action_stats: Vector2, is_steal: bool, e
 
 	var return_value: bool = false
 	return_value = entity.take_damage(action_stats.x)
-	if (action_stats.y <= 0) or (is_steal and not return_value):
+	if (action_stats.y <= 0) or (is_steal and return_value):
 		health += action_stats.y
+		model.get_node("Sprite3D").hpScale(float(health)/max(health, base_health))
 	
 	check_for_death()
 	
@@ -115,6 +116,7 @@ func heal_ability(ally_pos: Vector2, entity: CharacterBase):
 
 	entity.get_healed(heal.x)
 	health += heal.y
+	model.get_node("Sprite3D").hpScale(float(health)/max(health, base_health))
 	check_for_death()
 	
 	return true
@@ -124,6 +126,7 @@ func class_ability():
 
 func get_healed(heal_to_get: int):
 	health += heal_to_get
+	model.get_node("Sprite3D").hpScale(float(health)/max(health, base_health))
 
 func take_damage(damage_to_take: int):
 

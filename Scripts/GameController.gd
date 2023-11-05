@@ -1,8 +1,10 @@
 class_name GameController extends Node3D
 
 @onready var file = 'res://Maps/map1.txt'
+@onready var file1 = 'a'
 
-
+var death_scene 
+var vic_scene
 
 var tile_scene
 var chara_scene
@@ -19,6 +21,8 @@ var end_round_button: Button
 var sprites: Array[CompressedTexture2D]
 var sprites_size: int = 20
 func _ready():
+	death_scene = preload("res://Maps/Death.tscn")
+	vic_scene = preload("res://Maps/PostMission1.tscn")
 	sprites.resize(sprites_size)
 	#friendly:
 	sprites[CharacterBase.Character_Class.Brute] = preload("res://Charas/Headshot_Brutus.png")
@@ -34,7 +38,7 @@ func _ready():
 
 var lastChar:CharacterBase = null
 var mode = 0
-var timer = 1.0
+var timer = 0
 func _process(delta):
 	if lastChar != current_selected_character:
 		lastChar = current_selected_character
@@ -47,14 +51,17 @@ func _process(delta):
 	check_for_EOG()
 	
 	if mode == 1:
-		get_node("WorldEnvironment").brightness = timer
-		timer -= delta
-		if timer <= 0:
+		#black out
+		get_node("UI/CanvasLayer/black").set_modulate(Color(1,1,1,timer))
+		timer += delta
+		if timer >= 1:
 			mode = 2
 			timer = 0
 	
 	elif mode == 3:
-		get_node("WorldEnvironment").brightness = 1.0
+		#remove black
+		get_node("UI/CanvasLayer/black").set_modulate(Color(1,1,1,0))
+		mode = 4
 
 
 func init_buttons_array():
@@ -277,13 +284,13 @@ func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
 	return null
 
 func check_for_EOG():
-	if list_of_players.size() == 0: print("dead")
+	if list_of_players.size() == 0: get_tree().change_scene_to_packed(death_scene)
 	if list_of_enemies.size() == 0: 
 		if mode == 0:
 			mode = 1
 			get_node("erzähler").play()
-		else: 
-			
+		elif mode == 4: 
+			get_tree().change_scene_to_packed(vic_scene)
 
 #state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
@@ -482,4 +489,9 @@ func _on_music_finished():
 
 func _on_erzähler_finished():
 	mode = 3
+	instantiate_entity(Vector2(0,3),true, "", CharacterBase.Character_Class.Minion)
+	instantiate_entity(Vector2(0,6),true, "", CharacterBase.Character_Class.Minion)
+	instantiate_entity(Vector2(1,4),true, "", CharacterBase.Character_Class.Minion)
+	instantiate_entity(Vector2(1,5),true, "", CharacterBase.Character_Class.Minion)
+	
 	pass # Replace with function body.
