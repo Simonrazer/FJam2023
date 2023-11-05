@@ -41,6 +41,10 @@ func _process(delta):
 		else:
 			get_node("UI/CanvasLayer/ColorRect/currentImg").texture = sprites[current_selected_character.character_class]
 			get_node("UI/CanvasLayer/ColorRect/currentImg").size = Vector2(100,100)
+	
+	check_for_EOG()
+
+
 func init_buttons_array():
 	buttons[0] = get_node("UI/CanvasLayer/ColorRect/MoveButton")
 	buttons[0].button_down.connect(_move_btn_click)
@@ -258,6 +262,11 @@ func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
 		if entity.get_pos() == pos: return entity
 	
 	return null
+
+func check_for_EOG():
+	if list_of_players.size() == 0: print("dead")
+	if list_of_enemies.size() == 0: print("alive")
+
 #state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
 	print("Old State: ", GameControlStates.keys()[current_state])
