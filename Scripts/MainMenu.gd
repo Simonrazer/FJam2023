@@ -1,5 +1,5 @@
 extends Node2D
-var simultaneous_scene = preload("res://Assets/test_load.tscn")
+var simultaneous_scene = preload("res://Maps/PreMission1.tscn")
 var tx: TextureRect
 var px: TextureRect
 # Called when the node enters the scene tree for the first time.

@@ -20,9 +20,11 @@ script = ExtResource("1_n3wxl")
 
 [node name="Boss" type="TextureRect" parent="CanvasLayer"]
 z_index = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.150174
+anchor_top = 0.104938
+anchor_right = 0.884549
+anchor_bottom = 0.842593
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ch8ss")

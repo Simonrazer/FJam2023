@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ch55krcnsm200"]
+[gd_scene load_steps=32 format=3 uid="uid://ch55krcnsm200"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://jkplq0ibnhcb" path="res://Assets/pipes/change2.tscn" id="23_q4x6h"]
 [ext_resource type="Script" path="res://Assets/EnemyAI.gd" id="24_p3xyd"]
 [ext_resource type="AudioStream" uid="uid://8obqb3qavyg5" path="res://Audio/spell_fire_07.ogg" id="25_6hyr8"]
+[ext_resource type="AudioStream" uid="uid://s6kq4cghtnkj" path="res://Audio/Mission_1_Erzahler_2.mp3" id="26_84ssj"]
 [ext_resource type="AudioStream" uid="uid://bfx0ce4rpvye" path="res://Audio/creature_hurt_01.ogg" id="26_bqhl8"]
 [ext_resource type="AudioStream" uid="uid://cxk410hrgn3fn" path="res://Audio/Heavy Concept A Bass Master.wav" id="26_hritf"]
 
@@ -66,7 +67,7 @@ transform = Transform3D(-0.29295, 0, 0.793649, 0, 0.845989, 0, -0.793649, 0, -0.
 transform = Transform3D(0.415973, 0, 0.544997, 0, 0.685606, 0, -0.544997, 0, 0.415973, 7.38018, 0.00527167, 5.48359)
 
 [node name="a_wooden_crate" parent="." instance=ExtResource("5_l2yhs")]
-transform = Transform3D(2.55295, 0, 0, 0, 2.55295, 0, 0, 0, 2.55295, 1.5804, 0.0485526, 8.41772)
+transform = Transform3D(-2.53659, 0, 0.288515, 0, 2.55295, 0, -0.288515, 0, -2.53659, 3.06209, 0.0485526, 6.31574)
 
 [node name="wb" parent="." instance=ExtResource("6_1e4o5")]
 transform = Transform3D(1.59077, 0, 0, 0, 1.59077, 0, 0, 0, 1.59077, 6.39693, 0.0154092, -1.82875)
@@ -87,10 +88,13 @@ transform = Transform3D(-0.780307, 0, -0.0192338, 0, 0.780544, 0, 0.0192338, 0, 
 transform = Transform3D(-0.780307, -6.21146e-10, -0.0192338, -0.0046508, 0.757382, 0.188681, 0.0186631, 0.188738, -0.757152, 4.94276, 0.257291, 5.3175)
 
 [node name="openBox" parent="." instance=ExtResource("8_uqxx8")]
-transform = Transform3D(0.232669, 0, 0.355922, 0, 0.425224, 0, -0.355922, 0, 0.232669, -1.14293, 0.318442, 4.4011)
+transform = Transform3D(-0.0055663, 0, 0.425187, 0, 0.425224, 0, -0.425187, 0, -0.0055663, -1.03261, 0.291698, 4.47597)
 
 [node name="vise" parent="." instance=ExtResource("9_f7775")]
-transform = Transform3D(0.0619034, 0, 0, 0, 0.0619034, 0, 0, 0, 0.0619034, 2.01445, 0.493294, 8.81635)
+transform = Transform3D(-0.0136544, 0, 0.181259, 0, 0.181773, 0, -0.181259, 0, -0.0136544, 0.59852, 0.0105348, 6.77346)
+
+[node name="vise3" parent="." instance=ExtResource("9_f7775")]
+transform = Transform3D(-0.00249478, -0.139376, -0.11666, -0.144498, -0.069251, 0.0858258, -0.110252, 0.0939151, -0.109845, 1.86488, 0.396261, 6.77346)
 
 [node name="workbench2" parent="." instance=ExtResource("10_wd261")]
 transform = Transform3D(-4.09195e-08, 0, 0.93613, 0, 0.93613, 0, -0.93613, 0, -4.09195e-08, -0.76092, -0.0193826, 0.636456)
@@ -168,6 +172,9 @@ transform = Transform3D(0.83665, 0, 0.547738, 0, 1, 0, -0.547738, 0, 0.83665, 5.
 [node name="wooden_boxes7" parent="." instance=ExtResource("20_sg008")]
 transform = Transform3D(0.83665, 0, 0.547738, 0, 1, 0, -0.547738, 0, 0.83665, 5.92802, -3.57628e-07, 1.00779)
 
+[node name="wooden_boxes9" parent="." instance=ExtResource("20_sg008")]
+transform = Transform3D(0.999186, 0, -0.0403417, 0, 1, 0, 0.0403417, 0, 0.999186, 2.16349, -3.57628e-07, 4.18316)
+
 [node name="wooden_boxes6" parent="." instance=ExtResource("20_sg008")]
 transform = Transform3D(0.252525, 0, -0.96759, 0, 1, 0, 0.96759, 0, 0.252525, 4.88505, -5.96046e-07, 4.11551)
 
@@ -209,6 +216,9 @@ script = ExtResource("24_p3xyd")
 [node name="damdgesound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_6hyr8")
 
+[node name="erzähler" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_84ssj")
+
 [node name="deathsound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_bqhl8")
 
@@ -216,3 +226,6 @@ stream = ExtResource("26_bqhl8")
 stream = ExtResource("26_hritf")
 volume_db = -28.82
 autoplay = true
+
+[connection signal="finished" from="erzähler" to="." method="_on_erzähler_finished"]
+[connection signal="finished" from="music" to="." method="_on_music_finished"]

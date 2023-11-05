@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://drfuqo1fhhbno"]
+
+[ext_resource type="Script" path="res://Maps/PostMission1.gd" id="1_8p7i6"]
+[ext_resource type="Texture2D" uid="uid://4yn3raak3p2a" path="res://Backgrounds/Boss.png" id="2_v7xrp"]
+[ext_resource type="AudioStream" uid="uid://bfu6bg86d4g76" path="res://Audio/Mission_1_Ende.mp3" id="3_yld2e"]
+
+[sub_resource type="Environment" id="Environment_0tr44"]
+background_mode = 1
+
+[node name="PreMission1" type="Node2D"]
+script = ExtResource("1_8p7i6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Boss" type="TextureRect" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = -1
+anchor_left = 0.150174
+anchor_top = 0.104938
+anchor_right = 0.884549
+anchor_bottom = 0.842593
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_v7xrp")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0tr44")
+
+[node name="audio1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yld2e")
+autoplay = true
+
+[connection signal="finished" from="audio1" to="." method="_on_audio_1_finished"]

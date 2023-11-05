@@ -33,6 +33,8 @@ func _ready():
 	init_buttons_array()
 
 var lastChar:CharacterBase = null
+var mode = 0
+var timer = 1.0
 func _process(delta):
 	if lastChar != current_selected_character:
 		lastChar = current_selected_character
@@ -43,6 +45,16 @@ func _process(delta):
 			get_node("UI/CanvasLayer/ColorRect/currentImg").size = Vector2(100,100)
 	
 	check_for_EOG()
+	
+	if mode == 1:
+		get_node("WorldEnvironment").brightness = timer
+		timer -= delta
+		if timer <= 0:
+			mode = 2
+			timer = 0
+	
+	elif mode == 3:
+		get_node("WorldEnvironment").brightness = 1.0
 
 
 func init_buttons_array():
@@ -267,7 +279,12 @@ func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
 
 func check_for_EOG():
 	if list_of_players.size() == 0: print("dead")
-	if list_of_enemies.size() == 0: print("alive")
+	if list_of_enemies.size() == 0: 
+		if mode == 0:
+			mode = 1
+			get_node("erzähler").play()
+		else: 
+			
 
 #state machine functions
 func change_state(change: ChangeTrigger, tile: Vector2): #parameters?
@@ -452,3 +469,13 @@ func yourTurn():
 	current_state = GameControlStates.PlayerRound
 	for player in list_of_players:
 		player.start_new_round()
+
+
+func _on_music_finished():
+	get_node("music").play()
+	pass # Replace with function body.
+
+
+func _on_erzähler_finished():
+	mode = 3
+	pass # Replace with function body.

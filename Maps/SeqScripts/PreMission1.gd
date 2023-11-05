@@ -20,7 +20,7 @@ var mode = 0
 func _process(delta):
 	if mode == 1:
 		#boss fade out
-		i1.set_self_modulate(Color(1,1,1,timer))
+		#i1.set_self_modulate(Color(1,1,1,timer))
 		timer -= delta
 		if timer < 0:
 			mode = 2
