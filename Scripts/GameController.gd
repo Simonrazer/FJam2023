@@ -492,7 +492,6 @@ func _on_erzähler_finished():
 	mode = 3
 	instantiate_entity(Vector2(0,3),true, "", CharacterBase.Character_Class.Minion)
 	instantiate_entity(Vector2(0,6),true, "", CharacterBase.Character_Class.Hound)
-	instantiate_entity(Vector2(1,4),true, "", CharacterBase.Character_Class.Hound)
 	instantiate_entity(Vector2(1,5),true, "", CharacterBase.Character_Class.Minion)
 	
 	pass # Replace with function body.

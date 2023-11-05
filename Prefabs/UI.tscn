@@ -26,7 +26,7 @@ offset_left = -0.0229912
 offset_top = -0.0270004
 offset_right = 0.124031
 offset_bottom = 0.0789986
-text = "Move"
+text = "Bewegung"
 
 [node name="AttackButton" type="Button" parent="CanvasLayer/ColorRect"]
 layout_mode = 1
@@ -39,7 +39,7 @@ offset_left = -0.0469894
 offset_top = -0.135002
 offset_right = -6.98396
 offset_bottom = -0.029007
-text = "Attack"
+text = "Angriff"
 
 [node name="StealButton" type="Button" parent="CanvasLayer/ColorRect"]
 layout_mode = 1
@@ -52,7 +52,7 @@ offset_left = -0.0469894
 offset_top = 0.0739899
 offset_right = 0.100037
 offset_bottom = -0.091011
-text = "Steal"
+text = "Lebensraub"
 
 [node name="HealButton" type="Button" parent="CanvasLayer/ColorRect"]
 layout_mode = 1
@@ -65,7 +65,7 @@ offset_left = -0.0709896
 offset_top = 0.0499954
 offset_right = 0.0760269
 offset_bottom = -0.115005
-text = "Heal"
+text = "Heilung"
 
 [node name="ClassButton" type="Button" parent="CanvasLayer/ColorRect"]
 visible = false
@@ -78,6 +78,7 @@ text = "Class
 "
 
 [node name="<ITEM>" type="Button" parent="CanvasLayer/ColorRect"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.099
