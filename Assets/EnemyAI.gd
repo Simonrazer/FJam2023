@@ -6,6 +6,7 @@ enum moveEnum{
 	move
 }
 
+var delay = 0.1
 var restricted_tiles:Array[Vector2]
 var done_calculating:bool
 var myTurn:bool = false
@@ -27,7 +28,7 @@ func _process(delta):
 		if(done_calculating):
 			if(nextMove < moves.size()):
 				if(countdown < 0):
-					countdown = 1
+					countdown = delay
 					#could be done by calling a function in gamecontroller in case its pass my value and shit doesnt update
 					match moves[nextMove][0]:
 						moveEnum.move:

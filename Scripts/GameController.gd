@@ -441,6 +441,8 @@ func get_possible_moves(action_length: int, center: Vector2, restricted_tiles: A
 			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			if (i*i + j*j) > action_length*action_length: continue
+			for friend in list_of_players:
+				if friend.position_on_map.x == tile_pos.x and friend.position_on_map.y == tile_pos.y: continue
 			for schmile in restricted_tiles:
 				if tile_pos.x==schmile.x and tile_pos.y == schmile.y: continue
 			possible_moves.append([tile_pos.x,tile_pos.y])
