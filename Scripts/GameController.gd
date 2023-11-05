@@ -254,6 +254,8 @@ func end_round_function():
 	clear_all_colored_tiles()
 	current_selected_character = null
 	current_state = GameControlStates.EnemyInit
+	for enemy in list_of_enemies:
+		enemy.start_new_round()
 	get_node("EnemyAI").my_turn(TileMatrix,list_of_enemies,list_of_players)
 
 
@@ -446,3 +448,5 @@ func get_possible_moves(action_length: int, center: Vector2, restricted_tiles: A
 
 func yourTurn():
 	current_state = GameControlStates.PlayerRound
+	for player in list_of_players:
+		player.start_new_round()
