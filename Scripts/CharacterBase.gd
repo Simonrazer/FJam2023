@@ -142,6 +142,9 @@ func take_damage(damage_to_take: int):
 	
 func check_for_death():
 	if health <= 0:
+		if is_playable: model.get_parent().list_of_players.erase(self)
+		else: model.get_parent().list_of_enemies.erase(self)
+		model.queue_free()
 		pass #away
 
 func set_model(n_model: Node3D):
