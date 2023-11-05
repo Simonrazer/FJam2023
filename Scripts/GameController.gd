@@ -250,6 +250,8 @@ func end_round_function():
 	clear_all_colored_tiles()
 	current_selected_character = null
 	current_state = GameControlStates.EnemyInit
+	get_node("EnemyAI").my_turn(TileMatrix,list_of_enemies,list_of_players)
+
 
 func get_entity_at_pos(pos: Vector2, list: Array[CharacterBase]):
 	for entity in list:
@@ -417,3 +419,17 @@ func _item_btn_click():
 func _end_round_btn_click():
 	change_state(ChangeTrigger.EndRound, Vector2())
 
+func get_possible_moves(action_length: int, center: Vector2):
+	var possible_moves = []
+	for i in range(-action_length, action_length + 1):
+		for j in range(-action_length, action_length + 1):
+			var tile_pos: Vector2 = Vector2(center.x + i, center.y + j)
+			
+			if i == 0 and j == 0: continue
+			if tile_pos.x < 0 or tile_pos.y < 0: continue
+			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
+			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
+			if (i*i + j*j) > action_length*action_length: continue
+			
+			possible_moves.append([tile_pos.x,tile_pos.y])
+	return possible_moves
