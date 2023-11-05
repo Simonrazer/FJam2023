@@ -64,7 +64,6 @@ func calculate_moveset():
 					if friend.health < min_hp:
 						min_hp = friend.health
 						next_attacked = friend
-		print(enemy_int)
 		if next_attacked != null:
 			if enemy.health > enemy.base_health*0.5:
 				new_moves.append([moveEnum.attack,next_attacked,enemy.damage[0]])
@@ -80,6 +79,7 @@ func calculate_moveset():
 					nearest_friend = friend
 					min_dist = dist
 			var reachable_tiles = gc.get_possible_moves(enemy.movement,enemy.position_on_map,restricted_tiles)
+			if reachable_tiles.size() == 0: continue
 			var attack_min_dist = 100;
 			var current_move;
 			for possible_target in reachable_tiles:
@@ -108,6 +108,7 @@ func my_turn(gcTileMatrix, gcenemies:Array[CharacterBase], gcplayers:Array[Chara
 	players = gcplayers
 	TileMatrix = gcTileMatrix
 	nextMove = 0
+	restricted_tiles = []
 	for enemy in gcenemies:
 		restricted_tiles.append(enemy.position_on_map)
 	
