@@ -428,7 +428,7 @@ func _item_btn_click():
 func _end_round_btn_click():
 	change_state(ChangeTrigger.EndRound, Vector2())
 
-func get_possible_moves(action_length: int, center: Vector2):
+func get_possible_moves(action_length: int, center: Vector2, restricted_tiles: Array[Vector2]):
 	var possible_moves = []
 	for i in range(-action_length, action_length + 1):
 		for j in range(-action_length, action_length + 1):
@@ -439,6 +439,10 @@ func get_possible_moves(action_length: int, center: Vector2):
 			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			if (i*i + j*j) > action_length*action_length: continue
-			
+			for schmile in restricted_tiles:
+				if tile_pos.x==schmile.x and tile_pos.y == schmile.y: continue
 			possible_moves.append([tile_pos.x,tile_pos.y])
 	return possible_moves
+
+func yourTurn():
+	current_state = GameControlStates.PlayerRound

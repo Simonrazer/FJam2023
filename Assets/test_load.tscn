@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ch55krcnsm200"]
+[gd_scene load_steps=28 format=3 uid="uid://ch55krcnsm200"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://om400qi6kih4" path="res://Prefabs/UI.tscn" id="22_sxdvu"]
 [ext_resource type="PackedScene" uid="uid://jkplq0ibnhcb" path="res://Assets/pipes/change2.tscn" id="23_q4x6h"]
 [ext_resource type="Script" path="res://Assets/EnemyAI.gd" id="24_p3xyd"]
-[ext_resource type="AudioStream" uid="uid://cingasjmyemmt" path="res://Audio/FJam223.wav" id="25_5lxkx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 
@@ -203,7 +202,3 @@ transform = Transform3D(0.694169, 0, 0.307396, 0, 0.759186, 0, -0.307396, 0, 0.6
 
 [node name="EnemyAI" type="Node3D" parent="."]
 script = ExtResource("24_p3xyd")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("25_5lxkx")
-autoplay = true
