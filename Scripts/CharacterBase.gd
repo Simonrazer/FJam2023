@@ -126,6 +126,7 @@ func get_healed(heal_to_get: int):
 	health += heal_to_get
 
 func take_damage(damage_to_take: int):
+
 	armor += damage_to_take
 	model.get_node("Sprite3D").set_armor(max(0, armor))
 	if armor < 0:
@@ -137,14 +138,19 @@ func take_damage(damage_to_take: int):
 		armor = 0
 		check_for_death()
 		return true
+	else:
+		model.get_parent().get_node("damdgesound").play()
 	
 	return false
 	
 func check_for_death():
 	if health <= 0:
+		model.get_parent().get_node("deathsound").play()
 		if is_playable: model.get_parent().list_of_players.erase(self)
 		else: model.get_parent().list_of_enemies.erase(self)
 		model.queue_free()
+	else:
+		model.get_parent().get_node("damdgesound").play()
 		pass #away
 
 func set_model(n_model: Node3D):
