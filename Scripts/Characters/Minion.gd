@@ -5,7 +5,7 @@ class_name Minion extends CharacterBase
 @export var minion_base_health: int = 3
 @export var minion_base_armor: int = 0
 @export var minion_base_movement: int = 2
-@export var minion_base_damage: Vector2 = Vector2(-4, 0)
+@export var minion_base_damage: Vector2 = Vector2(-2, 0)
 @export var minion_base_steal: Vector2 = Vector2(0, 0)
 @export var minion_base_heal: Vector2 = Vector2(0, 0)
 @export var minion_base_damage_range: int = 1
