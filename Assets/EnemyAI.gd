@@ -33,7 +33,8 @@ func _process(delta):
 						moveEnum.move:
 							moves[nextMove][1].move(moves[nextMove][2])
 						moveEnum.attack:
-							moves[nextMove][1].take_damage(moves[nextMove][2])
+							if moves[nextMove][1].health > 0:
+								moves[nextMove][1].take_damage(moves[nextMove][2])
 						moveEnum.steal:
 							moves[nextMove][1].take_damage(moves[nextMove][2])
 						_:
