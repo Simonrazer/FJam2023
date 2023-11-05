@@ -26,7 +26,7 @@ func _ready():
 	_distance = DEFAULT_DISTANCE
 	_anchor_node = self.get_node(ANCHOR_NODE_PATH)
 	_rotation = _anchor_node.transform.basis.get_rotation_quaternion().get_euler()
-	_setinitial(Vector2(0,0.5))
+	_setinitial(Vector2(0,0.8))
 	
 func _process(delta: float):
 	if is_zoom_in:

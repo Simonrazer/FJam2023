@@ -11,7 +11,7 @@ light_volumetric_fog_energy = 1.089
 light_specular = 1.033
 shadow_enabled = true
 spot_range = 17.893
-spot_angle = 47.1093
+spot_angle = 27.8366
 
 [node name="lamp" parent="." instance=ExtResource("1_t4yvy")]
 transform = Transform3D(0.102188, 0, 0, 0, 0.102188, 0, 0, 0, 0.102188, 0, 0, 0)

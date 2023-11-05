@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyubxto371tk8"]
+[gd_scene load_steps=11 format=3 uid="uid://dyubxto371tk8"]
 
 [ext_resource type="Texture2D" uid="uid://4yn3raak3p2a" path="res://Backgrounds/Boss.png" id="1_ch8ss"]
 [ext_resource type="Script" path="res://Maps/SeqScripts/PreMission1.gd" id="1_n3wxl"]
 [ext_resource type="Texture2D" uid="uid://vivshqtvpxp4" path="res://Backgrounds/Brutuos.png" id="2_u53ga"]
 [ext_resource type="Texture2D" uid="uid://dpgqd7738p85t" path="res://Backgrounds/Milo.png" id="3_32wst"]
 [ext_resource type="Texture2D" uid="uid://bo60vg882fj81" path="res://Backgrounds/Lagerhaus.png" id="3_l7sjp"]
-[ext_resource type="AudioStream" uid="uid://bjquspcxqaafn" path="res://Audio/test.mp3" id="4_s2766"]
-[ext_resource type="AudioStream" uid="uid://ryxwntkn04si" path="res://Audio/test2.mp3" id="5_x7sbo"]
-[ext_resource type="AudioStream" uid="uid://ws7w8csq4g4l" path="res://Audio/test3.mp3" id="7_qhqif"]
+[ext_resource type="AudioStream" uid="uid://do0001jpom3ce" path="res://Audio/Mission_1_Anfang_Part_1.mp3" id="6_hcsgl"]
+[ext_resource type="AudioStream" uid="uid://fux8dblb62sh" path="res://Audio/Mission_1_Anfang_Part_2.mp3" id="7_wah68"]
+[ext_resource type="AudioStream" uid="uid://4b3353ptdcpi" path="res://Audio/Mission_1_Anfang_Part_3.mp3" id="8_jjafu"]
+[ext_resource type="AudioStream" uid="uid://bbkmh8xil3snr" path="res://Audio/Mission_1_Erzahler_1.mp3" id="9_4bkny"]
 
 [sub_resource type="Environment" id="Environment_0tr44"]
 background_mode = 1
@@ -69,17 +70,17 @@ expand_mode = 1
 environment = SubResource("Environment_0tr44")
 
 [node name="audio1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_x7sbo")
+stream = ExtResource("6_hcsgl")
 autoplay = true
 
 [node name="audio2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_s2766")
+stream = ExtResource("7_wah68")
 
 [node name="audio3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_qhqif")
+stream = ExtResource("8_jjafu")
 
 [node name="audio4" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_qhqif")
+stream = ExtResource("9_4bkny")
 
 [connection signal="finished" from="audio1" to="." method="_audio_1_over"]
 [connection signal="finished" from="audio2" to="." method="_audio_2_over"]

@@ -91,6 +91,7 @@ offset_bottom = 0.0239868
 text = "ITEM"
 
 [node name="currentImg" type="TextureRect" parent="CanvasLayer/ColorRect"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.557
@@ -106,15 +107,16 @@ stretch_mode = 2
 
 [node name="EndRoundButton" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.895
-anchor_top = 0.912
-anchor_right = 0.989
-anchor_bottom = 1.0
-offset_left = -0.0400391
-offset_top = 0.0239868
-offset_right = -0.328003
-offset_bottom = 1.0
+anchor_left = 0.873
+anchor_top = 0.849
+anchor_right = 0.997
+anchor_bottom = 0.992
+offset_left = 0.303955
+offset_top = -0.152039
+offset_right = 0.456055
+offset_bottom = 0.18396
 text = "End Turn"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 visible = false
