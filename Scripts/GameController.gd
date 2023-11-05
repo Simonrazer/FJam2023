@@ -267,6 +267,7 @@ func clear_all_colored_tiles():
 func check_for_any_moves():
 	for player in list_of_players:
 		if player.has_actions(): return true
+	check_for_EOG()
 
 func end_round_function():
 	clear_all_colored_tiles()
@@ -492,8 +493,7 @@ func _on_music_finished():
 func _on_erzähler_finished():
 	mode = 3
 	instantiate_entity(Vector2(0,3),true, "", CharacterBase.Character_Class.Minion)
-	instantiate_entity(Vector2(0,6),true, "", CharacterBase.Character_Class.Minion)
-	instantiate_entity(Vector2(1,4),true, "", CharacterBase.Character_Class.Minion)
+	instantiate_entity(Vector2(0,6),true, "", CharacterBase.Character_Class.Hound)
 	instantiate_entity(Vector2(1,5),true, "", CharacterBase.Character_Class.Minion)
 	
 	pass # Replace with function body.

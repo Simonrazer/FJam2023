@@ -78,6 +78,7 @@ func calculate_moveset():
 				if dist < min_dist:
 					nearest_friend = friend
 					min_dist = dist
+			if nearest_friend == null: continue
 			var reachable_tiles = gc.get_possible_moves(enemy.movement,enemy.position_on_map,restricted_tiles)
 			if reachable_tiles.size() == 0: continue
 			var attack_min_dist = 100;

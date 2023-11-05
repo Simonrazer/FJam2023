@@ -1,5 +1,5 @@
 extends Node2D
-var simultaneous_scene = preload("res://Scripts/Shop.gd")
+var simultaneous_scene = preload("res://Maps/Shop.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +12,6 @@ func _process(delta):
 
 
 func _on_audio_1_finished():
+	print("osndf")
 	get_tree().change_scene_to_packed(simultaneous_scene)
 	pass # Replace with function body.
