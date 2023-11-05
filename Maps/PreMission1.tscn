@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyubxto371tk8"]
+
+[ext_resource type="Texture2D" uid="uid://4yn3raak3p2a" path="res://Backgrounds/Boss.png" id="1_ch8ss"]
+[ext_resource type="Script" path="res://Maps/SeqScripts/PreMission1.gd" id="1_n3wxl"]
+[ext_resource type="Texture2D" uid="uid://vivshqtvpxp4" path="res://Backgrounds/Brutuos.png" id="2_u53ga"]
+[ext_resource type="Texture2D" uid="uid://dpgqd7738p85t" path="res://Backgrounds/Milo.png" id="3_32wst"]
+[ext_resource type="Texture2D" uid="uid://bo60vg882fj81" path="res://Backgrounds/Lagerhaus.png" id="3_l7sjp"]
+[ext_resource type="AudioStream" uid="uid://bjquspcxqaafn" path="res://Audio/test.mp3" id="4_s2766"]
+[ext_resource type="AudioStream" uid="uid://ryxwntkn04si" path="res://Audio/test2.mp3" id="5_x7sbo"]
+[ext_resource type="AudioStream" uid="uid://ws7w8csq4g4l" path="res://Audio/test3.mp3" id="7_qhqif"]
+
+[sub_resource type="Environment" id="Environment_0tr44"]
+background_mode = 1
+
+[node name="PreMission1" type="Node2D"]
+script = ExtResource("1_n3wxl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Boss" type="TextureRect" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ch8ss")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Lagerhaus" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_l7sjp")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Milo" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+anchors_preset = -1
+anchor_left = 0.721125
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.263977
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("3_32wst")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Brutus" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 3
+anchors_preset = -1
+anchor_right = 0.283
+anchor_bottom = 1.0
+offset_right = -0.0160217
+texture = ExtResource("2_u53ga")
+expand_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0tr44")
+
+[node name="audio1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_x7sbo")
+autoplay = true
+
+[node name="audio2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s2766")
+
+[node name="audio3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_qhqif")
+
+[node name="audio4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_qhqif")
+
+[connection signal="finished" from="audio1" to="." method="_audio_1_over"]
+[connection signal="finished" from="audio2" to="." method="_audio_2_over"]
+[connection signal="finished" from="audio3" to="." method="_audio_3_over"]
+[connection signal="finished" from="audio4" to="." method="_audio_4_over"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq7njxovkv2lu"]
+[gd_scene load_steps=7 format=3 uid="uid://dq7njxovkv2lu"]
 
 [ext_resource type="Texture2D" uid="uid://c4pflmge46k5b" path="res://Backgrounds/BloodWars_Menu.jpg" id="1_26okc"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_fcme1"]
 [ext_resource type="Texture2D" uid="uid://10i3ykti7ppm" path="res://Backgrounds/BloodWars_Titel.jpg" id="3_mwmom"]
+[ext_resource type="AudioStream" uid="uid://bjquspcxqaafn" path="res://Audio/test.mp3" id="4_6osjv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56vm4"]
 bg_color = Color(0.596078, 0.635294, 0.145098, 0)
@@ -84,5 +85,9 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_mwmom")
 expand_mode = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6osjv")
+autoplay = true
 
 [connection signal="button_up" from="CanvasLayer/TextureRect/BtnStart" to="." method="_on_btn_start_button_up"]
