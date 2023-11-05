@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cju1iwhgxiwui"]
+[gd_scene load_steps=16 format=3 uid="uid://cju1iwhgxiwui"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_54yht"]
 [ext_resource type="PackedScene" uid="uid://cdjpuov2md3i3" path="res://Prefabs/CameraOrbito.tscn" id="2_1ywo8"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dl03osixwvbxd" path="res://Assets/schrankding/old_furniture.glb" id="9_vkr6y"]
 [ext_resource type="PackedScene" uid="uid://dr1msdak8u12k" path="res://Assets/crate1/a_wooden_crate.glb" id="10_igf7b"]
 [ext_resource type="PackedScene" uid="uid://bb8e4r5e58rg1" path="res://Assets/chest1/chest.glb" id="11_e1y72"]
+[ext_resource type="PackedScene" uid="uid://cuj6fvbmruv8g" path="res://Assets/furnset/leuchter.tscn" id="13_nkgex"]
+[ext_resource type="PackedScene" uid="uid://c377elcbnnoy4" path="res://Assets/furnset/ohne_leucht.tscn" id="13_nqidu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_slays"]
 
@@ -18,7 +20,6 @@
 
 [node name="mission2" type="Node3D"]
 script = ExtResource("1_54yht")
-current_state = null
 
 [node name="CameraOrbito" parent="." instance=ExtResource("2_1ywo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11551, 0, 1.76763)
@@ -28,8 +29,13 @@ transform = Transform3D(9.45508, 0, 0, 0, 1, 0, 0, 0, 9.90923, 0, 0, 0)
 material_override = ExtResource("3_s7ojh")
 mesh = SubResource("PlaneMesh_slays")
 
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.45508, 0, 0, 0, 1, 0, 0, 0, 9.90923, 0, 0, 19.823)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.44771, 0, 0, 0, 0.314675, 0, 0, 0, 5.49961, -2.12134, 0.0201597, 3.71761)
+transform = Transform3D(8.92425, 0, -2.29541, 0, 0.314675, 0, 1.52577, 0, 13.4259, 0.28276, -0.100109, 4.76952)
 material_override = ExtResource("4_2ts36")
 mesh = SubResource("BoxMesh_5xdly")
 
@@ -39,24 +45,69 @@ material_override = ExtResource("5_yfjdj")
 mesh = SubResource("PlaneMesh_slays")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.11654e-07, 1.23799, -1.07246e-06, 11.7053, -5.41142e-08, 0, -4.47302e-14, -1.08228e-07, -12.2675, -8.47994, 9.36265, 0)
+transform = Transform3D(2.05266e-07, 0.496659, -4.30252e-07, 4.69596, -2.17096e-08, 0, -1.7945e-14, -4.34191e-08, -4.9215, -9.29804, 4.48496, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.05266e-07, 0.496659, -4.30252e-07, 4.69596, -2.17096e-08, 0, -1.7945e-14, -4.34191e-08, -4.9215, -9.29804, 13.7218, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.05266e-07, 0.496659, -4.30252e-07, 4.69596, -2.17096e-08, 0, -1.7945e-14, -4.34191e-08, -4.9215, -9.29804, 4.48496, 9.66638)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.05266e-07, 0.496659, -4.30252e-07, 4.69596, -2.17096e-08, 0, -1.7945e-14, -4.34191e-08, -4.9215, -9.29804, 13.7218, 9.66638)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.69596, -4.34193e-08, 1.88069e-14, -4.10533e-07, -0.496659, 4.30252e-07, -1.7945e-14, -4.34191e-08, -4.9215, -5.27304, 11.7604, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.69596, -4.34193e-08, 1.88069e-14, -4.10533e-07, -0.496659, 4.30252e-07, -1.7945e-14, -4.34191e-08, -4.9215, -5.27304, 11.7604, 9.66638)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.69596, -4.34193e-08, 1.88069e-14, -4.10533e-07, -0.496659, 4.30252e-07, -1.7945e-14, -4.34191e-08, -4.9215, 4.01727, 11.7604, 0)
+material_override = ExtResource("3_s7ojh")
+mesh = SubResource("PlaneMesh_slays")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.69596, -4.34193e-08, 1.88069e-14, -4.10533e-07, -0.496659, 4.30252e-07, -1.7945e-14, -4.34191e-08, -4.9215, 4.01727, 11.7604, 9.66638)
 material_override = ExtResource("3_s7ojh")
 mesh = SubResource("PlaneMesh_slays")
 
 [node name="wooden_boxes" parent="." instance=ExtResource("6_birj7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44655, -4.76837e-07, -3.24991)
+transform = Transform3D(2.06738, 0, 0, 0, 2.06738, 0, 0, 0, 2.06738, -6.44655, -4.76837e-07, -3.24991)
 
 [node name="wooden_boxes2" parent="." instance=ExtResource("7_a7wh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.17944, -4.76837e-07, -5.80677)
+transform = Transform3D(1.66894, 0, 0, 0, 1.66894, 0, 0, 0, 1.66894, -6.17944, -4.76837e-07, -5.80677)
 
 [node name="stuhl" parent="." instance=ExtResource("8_onb1m")]
 transform = Transform3D(0.13112, 0, 0, 0, 0.13112, 0, 0, 0, 0.13112, -4.51086, 0, 0.0943871)
 
 [node name="old_furniture" parent="." instance=ExtResource("9_vkr6y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181561, 0, 4.21542)
+transform = Transform3D(-1.11917, 0, -2.2362, 0, 2.50062, 0, 2.2362, 0, -1.11917, 5.92948, 2.83344, -5.90609)
 
 [node name="a_wooden_crate" parent="." instance=ExtResource("10_igf7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.82513, 0, 4.9182)
+transform = Transform3D(7.24711, 0, 0, 0, 7.24711, 0, 0, 0, 7.24711, 7.1937, -9.53674e-07, 1.65821)
 
 [node name="chest" parent="." instance=ExtResource("11_e1y72")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.87876, 0, 8.00603)
+transform = Transform3D(-0.0728601, 0, -2.25209, 0, 2.25327, 0, 2.25209, 0, -0.0728601, -7.5049, 0, 3.69377)
+
+[node name="furniture_set2" parent="." instance=ExtResource("13_nkgex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 14.3253, 8)
+
+[node name="furniture_set" parent="." instance=ExtResource("13_nqidu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474773, 10.6221, -7.38359)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03018, 7.31169, 7.14867)
+omni_range = 13.3269

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ch55krcnsm200"]
+[gd_scene load_steps=31 format=3 uid="uid://ch55krcnsm200"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_tqucb"]
 [ext_resource type="Material" uid="uid://3ni2je5qchop" path="res://Assets/stoneFloorTex/stoneFloorTex.tres" id="2_g42lx"]
@@ -19,11 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://ckpr50277l6p0" path="res://Assets/woddenBoxes/wooden_boxes.glb" id="15_8y134"]
 [ext_resource type="PackedScene" uid="uid://b030i8h8sh3j5" path="res://Assets/lamp.tscn" id="19_83bff"]
 [ext_resource type="PackedScene" uid="uid://cdjpuov2md3i3" path="res://Prefabs/CameraOrbito.tscn" id="20_innbc"]
-[ext_resource type="PackedScene" path="res://Assets/woddenBoxes/1box.tscn" id="20_sg008"]
-[ext_resource type="PackedScene" path="res://Assets/woddenBoxes/2box.tscn" id="21_1rvpg"]
+[ext_resource type="PackedScene" uid="uid://cumkk04g8f0ub" path="res://Assets/woddenBoxes/1box.tscn" id="20_sg008"]
+[ext_resource type="PackedScene" uid="uid://dl4rqywxen3r6" path="res://Assets/woddenBoxes/2box.tscn" id="21_1rvpg"]
 [ext_resource type="PackedScene" uid="uid://om400qi6kih4" path="res://Prefabs/UI.tscn" id="22_sxdvu"]
 [ext_resource type="PackedScene" uid="uid://jkplq0ibnhcb" path="res://Assets/pipes/change2.tscn" id="23_q4x6h"]
 [ext_resource type="Script" path="res://Assets/EnemyAI.gd" id="24_p3xyd"]
+[ext_resource type="AudioStream" uid="uid://8obqb3qavyg5" path="res://Audio/spell_fire_07.ogg" id="25_6hyr8"]
+[ext_resource type="AudioStream" uid="uid://bfx0ce4rpvye" path="res://Audio/creature_hurt_01.ogg" id="26_bqhl8"]
+[ext_resource type="AudioStream" uid="uid://cxk410hrgn3fn" path="res://Audio/Heavy Concept A Bass Master.wav" id="26_hritf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_geb3c"]
 
@@ -202,3 +205,14 @@ transform = Transform3D(0.694169, 0, 0.307396, 0, 0.759186, 0, -0.307396, 0, 0.6
 
 [node name="EnemyAI" type="Node3D" parent="."]
 script = ExtResource("24_p3xyd")
+
+[node name="damdgesound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_6hyr8")
+
+[node name="deathsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_bqhl8")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_hritf")
+volume_db = -28.82
+autoplay = true

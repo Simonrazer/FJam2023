@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxk410hrgn3fn"
+path="res://.godot/imported/Heavy Concept A Bass Master.wav-4826d1664696e61ed2652e099f920f11.sample"
+
+[deps]
+
+source_file="res://Audio/Heavy Concept A Bass Master.wav"
+dest_files=["res://.godot/imported/Heavy Concept A Bass Master.wav-4826d1664696e61ed2652e099f920f11.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
