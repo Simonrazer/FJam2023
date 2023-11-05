@@ -244,7 +244,6 @@ func clear_all_colored_tiles():
 	for tile in all_colored_tiles:
 		tile.reset_color()
 	all_colored_tiles.clear()
-	print(len(all_colored_tiles))
 
 func check_for_any_moves():
 	for player in list_of_players:
@@ -441,10 +440,15 @@ func get_possible_moves(action_length: int, center: Vector2, restricted_tiles: A
 			if tile_pos.x >= Map_Width or tile_pos.y >= Map_Height: continue
 			if TileMatrix[tile_pos.x][tile_pos.y] == null: continue
 			if (i*i + j*j) > action_length*action_length: continue
+			var on_friend:bool = false
 			for friend in list_of_players:
-				if friend.position_on_map.x == tile_pos.x and friend.position_on_map.y == tile_pos.y: continue
+				if friend.position_on_map.x == tile_pos.x and friend.position_on_map.y == tile_pos.y:
+					on_friend = true
+			#if on_friend: continue
+			var on_enemy:bool = false
 			for schmile in restricted_tiles:
-				if tile_pos.x==schmile.x and tile_pos.y == schmile.y: continue
+				if tile_pos.x==schmile.x and tile_pos.y == schmile.y: on_enemy = true
+			if on_enemy: continue
 			possible_moves.append([tile_pos.x,tile_pos.y])
 	return possible_moves
 
